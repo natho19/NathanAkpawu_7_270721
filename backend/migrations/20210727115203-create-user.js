@@ -21,8 +21,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.STRING
             },
-            profilId: {
-                type: Sequelize.INTEGER
+            isAdmin: {
+                allowNull: false,
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             },
             createdAt: {
                 allowNull: false,
