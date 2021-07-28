@@ -4,6 +4,6 @@ const router = express.Router();
 const postController = require('../controllers/post');
 const auth = require('../middleware/auth');
 
-router.get('/', auth, postController.test);
+router.post('/', auth, postController.createPost);
 
 module.exports = router;
