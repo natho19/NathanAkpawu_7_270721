@@ -7,10 +7,8 @@ module.exports = (req, res, next) => {
     try {
         // Récupère le token du header en séparant "Bearer" du "token"
         const token = req.headers.authorization.split(' ')[1];
-        console.log(token);
         // verify permet de décoder le token
         const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-        console.log(decodedToken);
         const userId = decodedToken.userId;
         // Si l'id existe et qu'il est différent de celui récupéré dans le token
         if (req.body.userId && req.body.userId !== userId) {
