@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const Post = require('../models').Post;
 const User = require('../models').User;
