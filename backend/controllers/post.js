@@ -66,3 +66,31 @@ exports.modifyPost = (req, res, next) => {
         res.status(401).json({ error })
     }   
 }
+
+exports.deletePost = (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+        // Pour que l'utilisateur puisse supprimer uniquement ses articles 
+        const userId = decodedToken.userId; 
+
+        Post.findOne({ where: { id: req.params.id } })
+            .then(post => {
+                if (post.imageUrl) {
+                    const filename = post.imageUrl.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Post.destroy({ where: { id: req.params.id, userId: userId }})
+                            .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+                            .catch(error => res.status(400).json({ error }));
+                    })
+                } else {
+                    Post.destroy({ where: { id: req.params.id, userId: userId }})
+                        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+                        .catch(error => res.status(400).json({ error }));
+                }
+            })
+            .catch(error => res.status(500).json({ error }))
+    } catch (error) {
+        res.status(401).json({ error })
+    }   
+}
