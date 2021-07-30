@@ -14,7 +14,7 @@ exports.createPost = (req, res) => {
     };
     
     Post.create(post)
-        .then(() => res.status(201).json({ message: 'Post créé !' }))
+        .then(() => res.status(201).json({ message: 'Post créé avec succès' }))
         .catch(error => res.status(400).json({ message: 'Impossible de créer ce post', error }));
 }
 
@@ -26,9 +26,10 @@ exports.getAllPosts = (req, res) => {
 
 exports.getOnePost = (req, res) => {
     const id = req.params.id;
-    Post.findOne({ where: { id: id } })
+
+    Post.findOne({ where: { id: id }, include: { model: User } })
         .then(post => res.status(200).json(post))
-        .catch(error => res.status(400).json({ message: 'Impossible d\'afficher le post', error }));
+        .catch(error => res.status(400).json({ message: 'Impossible d\'afficher ce post', error }));
 }
 
 exports.modifyPost = (req, res) => {
@@ -42,12 +43,11 @@ exports.modifyPost = (req, res) => {
     }
 
     Post.update(updatedPost, { where: { id: id, userId: userId }})
-        .then(() => res.status(200).json({ message: 'Post modifié !' }))
+        .then(() => res.status(200).json({ message: 'Post modifié avec succès' }))
         .catch(error => res.status(400).json({ message: 'Impossible de modifier ce post', error }));
 }
 
 exports.deletePost = (req, res) => {
-
     const id = req.params.id;
     const userId = req.body.userId;
 
@@ -57,13 +57,13 @@ exports.deletePost = (req, res) => {
                 const filename = post.imageUrl.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     Post.destroy({ where: { id: id, userId: userId }})
-                        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-                        .catch(error => res.status(400).json({ message: 'Impossible de supprimer le post', error }));
+                        .then(() => res.status(200).json({ message: 'Post supprimé avec succès' }))
+                        .catch(error => res.status(400).json({ message: 'Impossible de supprimer ce post', error }));
                 })
             } else {
                 Post.destroy({ where: { id: id, userId: userId }})
-                    .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-                    .catch(error => res.status(400).json({ message: 'Impossible de supprimer le post', error }));
+                    .then(() => res.status(200).json({ message: 'Post supprimé avec succès' }))
+                    .catch(error => res.status(400).json({ message: 'Impossible de supprimer ce post', error }));
             }
         })
         .catch(error => res.status(500).json({ error }))
