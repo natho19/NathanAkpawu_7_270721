@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
         // Récupère le nom d'origine sans l'extension et remplace les espaces par des underscores
         const name = file.originalname.split('.')[0].split(' ').join('_');
         const extension = MIME_TYPES[file.mimetype];
-        // Ajoute un timestamp "Date.now()" au nom pour le rendre unique
+        // Ajoute un timestamp au nom pour le rendre unique
         callback(null, name + Date.now() + '.' + extension);
     }
 });

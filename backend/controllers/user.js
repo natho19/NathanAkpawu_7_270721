@@ -7,6 +7,7 @@ dotenv.config();
 
 const User = require('../models').User;
 
+// S'inscrire
 exports.signup = (req, res) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -22,6 +23,7 @@ exports.signup = (req, res) => {
         .catch(error => res.status(500).json({ error }))
 };
 
+// Se connecter
 exports.login = (req, res) => {
     User.findOne({ where: { email: maskdata.maskEmail2(req.body.email) } })
         .then(user => {

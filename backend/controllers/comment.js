@@ -1,6 +1,7 @@
 const Comment = require('../models').Comment;
 const User = require('../models').User;
 
+// Ajouter un nouveau commentaire
 exports.createComment = (req, res) => {
     const comment = {
         content: req.body.content,
@@ -13,6 +14,7 @@ exports.createComment = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible de créer ce commentaire', error }));
 }
 
+// Afficher tous les commentaires
 exports.getAllComments = (req, res) => {
     const postId = req.params.postId;
 
@@ -21,6 +23,7 @@ exports.getAllComments = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible d\'afficher tous les commentaires', error }));
 }
 
+// Afficher un commentaire
 exports.getOneComment = (req, res) => {
     const id = req.params.id;
     const postId = req.params.postId;
@@ -36,6 +39,7 @@ exports.getOneComment = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible d\'afficher ce commentaire', error }));
 }
 
+// Modifier un commentaire
 exports.modifyComment = (req, res) => {
     const id = req.params.id;
     const updatedComment = { content: req.body.content };
@@ -47,6 +51,7 @@ exports.modifyComment = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible de modifier ce commentaire', error }));
 }
 
+// Supprimer un commentaire
 exports.deleteComment = (req, res) => {
     const id = req.params.id;
     const postId = req.params.postId;
