@@ -10,4 +10,4 @@
     }
 </script>
 
-<style scoped></style>
+<style scoped src="./Footer.css"></style>

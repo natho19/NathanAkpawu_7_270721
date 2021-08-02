@@ -12,4 +12,4 @@
     }
 </script>
 
-<style scoped></style>
+<style scoped src="./Header.css"></style>
