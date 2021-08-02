@@ -1,9 +1,7 @@
-import Home from './views/Home'
-import Page1 from './views/Page1'
-import Page2 from './views/Page2'
+import Signup from './views/Signup'
+import Login from './views/Login'
 
 export default [
-    {path: '/', component: Home},
-    {path: '/page1', component: Page1},
-    {path: '/page2', component: Page2},
+    {path: '/', component: Login},
+    {path: '/signup', component: Signup},
 ]

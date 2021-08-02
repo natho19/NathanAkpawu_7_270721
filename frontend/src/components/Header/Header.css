@@ -1,3 +1,8 @@
-li {
-    color: red;
+.ml-auto {
+    margin-left: auto !important;
+}
+
+.logo {
+    width: 230px;
+    height: auto;
 }

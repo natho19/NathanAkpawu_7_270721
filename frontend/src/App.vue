@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <header-top></header-top>
-        <router-view></router-view>
+        <div class="content">
+            <router-view></router-view>
+        </div>
         <footer-bottom></footer-bottom>
     </div>
 </template>
@@ -21,7 +23,14 @@
 
 <style>
     #app {
-        text-align: center;
-        margin-top: 60px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content {
+        flex: 1 0 auto;
+        background: #F9F9F9;
+        padding: 40px 0;
     }
 </style>

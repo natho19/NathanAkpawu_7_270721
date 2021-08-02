@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <span>Copyright footer</span>
+        <p>&copy; Copyright Groupomania 2021</p>
     </footer>
 </template>
 
