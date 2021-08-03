@@ -4,7 +4,7 @@
             <b-container>
                 <b-navbar variant="faded" type="light">
                     <b-navbar-brand href="#">
-                        <img src="../../assets/logo.svg" class="d-inline-block align-top logo" alt="Groupomania">
+                        <img src="../../assets/images/logo.svg" class="d-inline-block align-top logo" alt="Groupomania">
                     </b-navbar-brand>
                 </b-navbar>
 
@@ -13,10 +13,12 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
-
-                        <b-nav-item href="#">S'inscrire</b-nav-item>
-                        <b-nav-item href="#">Se connecter</b-nav-item>
-
+                        <li class="nav-item">
+                            <router-link to="/signup" class="nav-link">S'inscrire</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/login" class="nav-link" exact>Se connecter</router-link>
+                        </li>
                         <!-- <b-nav-item-dropdown text="Lang" right>
                             <b-dropdown-item href="#">EN</b-dropdown-item>
                             <b-dropdown-item href="#">ES</b-dropdown-item>

@@ -6,3 +6,7 @@
     width: 230px;
     height: auto;
 }
+
+.router-link-exact-active {
+    color: #FFF !important;
+}
