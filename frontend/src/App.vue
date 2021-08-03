@@ -74,4 +74,20 @@
         background: #F9F9F9;
         padding: 40px 0;
     }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-card {
+        background: #FFF;
+        border: 1px solid #CED4DA;
+        padding: 25px !important;
+    }
+
+    .form-card h1 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        color: #FD2D01;
+    }
 </style>

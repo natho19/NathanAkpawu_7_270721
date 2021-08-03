@@ -1,17 +1,72 @@
 <template>
-    <div class="container mt-3">
-        <div class="row">
-            <h1>Page d'inscription</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil fugiat est iusto, non modi at. Itaque eaque consequuntur sit ab repellat nostrum fugiat, sed quam sint illum facere aliquam amet, non consectetur dicta odit quas soluta esse fugit neque necessitatibus, ex voluptates. At, possimus aut adipisci quam deserunt harum consectetur, nemo quos sed nostrum minima quibusdam cum quae, accusamus eligendi? Ipsa quis nesciunt mollitia id et ab voluptate nobis quas iusto maxime quae ducimus, vitae consequatur impedit nisi. Quis fugit, magnam ipsa perspiciatis delectus vero necessitatibus commodi repellendus alias esse! Impedit asperiores quos, saepe tempora et doloribus. Itaque, nulla praesentium.</p>
-        </div>
-    </div>
+    <b-container>
+        <b-row class="justify-content-center">
+            <b-col cols="10" md="6" class="form-card">
+                <h1><b-icon-person-plus-fill></b-icon-person-plus-fill> S'inscrire en quelques secondes...</h1>
+
+                <b-form @submit="onSubmit" class="form">
+                    <b-form-group label="Nom" label-for="name">
+                        <b-form-input
+                        id="name"
+                        v-model="form.name"
+                        placeholder="Entrer votre nom"
+                        required
+                        autofocus
+                        ></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group label="Prénom" label-for="firstname">
+                        <b-form-input
+                        v-model="form.firstname"
+                        placeholder="Entrer votre prénom"
+                        required
+                        ></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group label="Email" label-for="email">
+                        <b-form-input
+                        id="email"
+                        v-model="form.email"
+                        placeholder="Entrer votre email"
+                        type="email"
+                        required
+                        ></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group label="Mot de passe" label-for="password">
+                        <b-form-input
+                        v-model="form.password"
+                        placeholder="Entrer votre mot de passe"
+                        type="password"
+                        required
+                        ></b-form-input>
+                    </b-form-group>
+                
+                    <b-button type="submit" variant="primary"><b-icon-person-plus-fill></b-icon-person-plus-fill> S'inscrire</b-button>
+                </b-form>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
     export default {
         name: 'Signup',
-        created() {
-            document.title = "S'inscrire"
+        data() {
+            return {
+                form: {
+                    name: '',
+                    firstname: '',
+                    email: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            onSubmit(event) {
+                event.preventDefault()
+                console.log(JSON.stringify(this.form))
+            }
         }
     }
 </script>

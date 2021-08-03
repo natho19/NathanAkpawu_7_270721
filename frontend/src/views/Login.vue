@@ -1,17 +1,53 @@
 <template>
-    <div class="container mt-3">
-        <div class="row">
-            <h1>Page de connexion</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil fugiat est iusto, non modi at. Itaque eaque consequuntur sit ab repellat nostrum fugiat, sed quam sint illum facere aliquam amet, non consectetur dicta odit quas soluta esse fugit neque necessitatibus, ex voluptates. At, possimus aut adipisci quam deserunt harum consectetur, nemo quos sed nostrum minima quibusdam cum quae, accusamus eligendi? Ipsa quis nesciunt mollitia id et ab voluptate nobis quas iusto maxime quae ducimus, vitae consequatur impedit nisi. Quis fugit, magnam ipsa perspiciatis delectus vero necessitatibus commodi repellendus alias esse! Impedit asperiores quos, saepe tempora et doloribus. Itaque, nulla praesentium.</p>
-        </div>
-    </div>
+    <b-container>
+        <b-row class="justify-content-center">
+            <b-col cols="10" md="6" class="form-card">
+                <h1><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right> Se connecter</h1>
+
+                <b-form @submit="onSubmit" class="form">
+                    <b-form-group>
+                        <b-form-input
+                        id="email"
+                        v-model="form.email"
+                        placeholder="Email"
+                        type="email"
+                        required
+                        autofocus
+                        ></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group>
+                        <b-form-input
+                        v-model="form.password"
+                        placeholder="Mot de passe"
+                        type="password"
+                        required
+                        ></b-form-input>
+                    </b-form-group>
+                
+                    <b-button type="submit" variant="primary"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right> Se connecter</b-button>
+                </b-form>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
     export default {
         name: 'Login',
-        created() {
-            document.title = "Se connecter"
+        data() {
+            return {
+                form: {
+                    email: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            onSubmit(event) {
+                event.preventDefault()
+                console.log(JSON.stringify(this.form))
+            }
         }
     }
 </script>
