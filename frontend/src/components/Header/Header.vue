@@ -17,14 +17,26 @@
                             <router-link to="/signup" class="nav-link">S'inscrire</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/login" class="nav-link" exact>Se connecter</router-link>
+                            <router-link to="/" class="nav-link" exact>Se connecter</router-link>
                         </li>
-                        <!-- <b-nav-item-dropdown text="Lang" right>
-                            <b-dropdown-item href="#">EN</b-dropdown-item>
-                            <b-dropdown-item href="#">ES</b-dropdown-item>
-                            <b-dropdown-item href="#">RU</b-dropdown-item>
-                            <b-dropdown-item href="#">FA</b-dropdown-item>
-                        </b-nav-item-dropdown> -->
+                        <b-nav-item-dropdown right>
+                            <!-- Using 'button-content' slot -->
+                            <template #button-content><b-icon-person-fill></b-icon-person-fill> Nathan Akpawu</template>
+                            <li>
+                                <router-link to="/account/1" class="dropdown-item">
+                                    <b-icon-pencil-fill></b-icon-pencil-fill> Modifier
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/delete/1" class="dropdown-item">
+                                    <b-icon-trash-fill></b-icon-trash-fill> Supprimer
+                                </router-link>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            <b-dropdown-item href="#" @click="logout()">
+                                <b-icon-box-arrow-in-left></b-icon-box-arrow-in-left> Se déconnecter
+                            </b-dropdown-item>
+                        </b-nav-item-dropdown>
                     </b-navbar-nav>
                 </b-collapse>
             </b-container>
@@ -34,7 +46,12 @@
 
 <script>
     export default {
-        name: 'Header'
+        name: 'Header',
+        methods: {
+            logout() {
+                this.$router.push('/');
+            }
+        }
     }
 </script>
 

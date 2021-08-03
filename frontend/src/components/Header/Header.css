@@ -7,6 +7,6 @@
     height: auto;
 }
 
-.router-link-exact-active {
+.nav-link.router-link-exact-active {
     color: #FFF !important;
 }
