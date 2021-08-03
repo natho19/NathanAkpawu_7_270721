@@ -19,16 +19,17 @@
                         <li class="nav-item">
                             <router-link to="/" class="nav-link" exact>Se connecter</router-link>
                         </li>
+                        <b-button @click="addPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
                         <b-nav-item-dropdown right>
                             <!-- Using 'button-content' slot -->
                             <template #button-content><b-icon-person-fill></b-icon-person-fill> Nathan Akpawu</template>
                             <li>
-                                <router-link to="/account/1" class="dropdown-item">
+                                <router-link to="/modify-user" class="dropdown-item">
                                     <b-icon-pencil-fill></b-icon-pencil-fill> Modifier
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="/delete/1" class="dropdown-item">
+                                <router-link to="/delete-user" class="dropdown-item">
                                     <b-icon-trash-fill></b-icon-trash-fill> Supprimer
                                 </router-link>
                             </li>
@@ -50,6 +51,9 @@
         methods: {
             logout() {
                 this.$router.push('/');
+            },
+            addPost() {
+                this.$router.push('/create-post');
             }
         }
     }
