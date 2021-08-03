@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <p>&copy; Copyright Groupomania 2021</p>
+        <p>&copy; Copyright Groupomania {{ new Date().getFullYear() }}</p>
     </footer>
 </template>
 
