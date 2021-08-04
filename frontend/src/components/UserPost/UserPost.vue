@@ -2,7 +2,7 @@
     <div class="user-post">
         <div class="user">
             <div class="user-info">
-                <b-avatar :size="32"></b-avatar>
+                <b-avatar></b-avatar>
                 <h2>Nathan Akpawu</h2>
             </div>
             <div class="user-actions">
@@ -11,9 +11,13 @@
             </div>
         </div>
         <div class="post">
-            <h3 class="post-title">Lorem ipsum dolor sit</h3>
+            <a href="#" class="post-link">
+                <h3 class="post-title">Lorem ipsum dolor sit</h3>
+            </a>
             <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis blanditiis libero minima, sint est. Facere ea ducimus vitae omnis, harum nisi id soluta fugit tempore et. Sunt, voluptatibus quidem?</p>
-            <img src="../../assets/images/heart_eyes.gif" alt="Heart eyes" class="post-image">
+            <a href="#">
+                <img src="../../assets/images/heart_eyes.gif" alt="Heart eyes" class="post-image">
+            </a>
         </div>
         <div class="comment">
             <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>

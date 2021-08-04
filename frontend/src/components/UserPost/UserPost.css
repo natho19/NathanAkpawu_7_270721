@@ -21,8 +21,9 @@
 .user-info .b-avatar {
     color: #989CA1;
     background-color: #DAE0E6;
-    margin-right: 6px;
-    font-size: 20px !important;
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
 }
 
 .user-info h2 {
@@ -54,10 +55,21 @@
     margin-bottom: 20px;
 }
 
+.post-link {
+    text-decoration: none;
+    color: #FD2D01;
+    transition: all .3s ease-in-out;
+}
+
+.post-link:hover {
+    text-decoration: underline;
+}
+
 .post-title {
     font-size: 20px;
     font-weight: bold;
     color: #FD2D01;
+    margin-bottom: 15px;
 }
 
 .post-content {
