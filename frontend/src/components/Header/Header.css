@@ -14,18 +14,3 @@
 .navbar-nav button.btn-danger {
     margin: 0 8px;
 }
-
-.btn-orange {
-    background: #FD2D01;
-    border-color: #FD2D01;
-    color: #FFF;
-}
-
-.btn-orange:hover, .btn-orange:active, .btn-orange:focus {
-    background-color: #DF2601;
-    border-color: #DF2601;
-}
-
-.btn-orange:focus {
-    box-shadow: 0 0 0 0.25rem rgba(223, 38, 1, .5);
-}

@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <b-row class="justify-content-center">
-            <b-col cols="10" md="6" class="form-card">
+            <b-col cols="10" md="6" class="card-form">
                 <h1><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier un post</h1>
 
                 <b-form @submit="onSubmit" class="form">
@@ -37,7 +37,7 @@
 
 <script>
     export default {
-        name: 'New',
+        name: 'Create',
         data() {
             return {
                 form: {

@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <b-row class="justify-content-center">
-            <b-col cols="10" md="6" class="form-card">
+            <b-col cols="10" md="6" class="card-form">
                 <h1><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right> Se connecter</h1>
 
                 <b-form @submit="onSubmit" class="form">

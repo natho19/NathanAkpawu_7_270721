@@ -79,15 +79,30 @@
         margin-bottom: 25px;
     }
 
-    .form-card {
+    .card-form, .card-post {
         background: #FFF;
         border: 1px solid #CED4DA;
         padding: 25px !important;
     }
 
-    .form-card h1 {
+    .card-form h1 {
         font-size: 1.8rem;
         margin-bottom: 25px;
         color: #FD2D01;
+    }
+
+    .btn-orange {
+        background: #FD2D01 !important;
+        border-color: #FD2D01 !important;
+        color: #FFF;
+    }
+
+    .btn-orange:hover, .btn-orange:active, .btn-orange:focus {
+        background-color: #DF2601 !important;
+        border-color: #DF2601 !important;
+    }
+
+    .btn-orange:focus {
+        box-shadow: 0 0 0 0.25rem rgba(223, 38, 1, .5) !important;
     }
 </style>

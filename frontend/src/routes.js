@@ -1,13 +1,15 @@
 import Signup from './views/users/Signup'
 import Login from './views/users/Login'
-import Modify from './views/users/Modify'
-import Delete from './views/users/Delete'
-import New from './views/posts/New'
+import ModifyUser from './views/users/Modify'
+import DeleteUser from './views/users/Delete'
+import CreatePost from './views/posts/Create'
+import Posts from './views/posts/Posts'
 
 export default [
     { path: '/', component: Login },
     { path: '/signup', component: Signup },
-    { path: '/modify-user', component: Modify },
-    { path: '/delete-user', component: Delete },
-    { path: '/create-post', component: New }
+    { path: '/modify-user', component: ModifyUser },
+    { path: '/delete-user', component: DeleteUser },
+    { path: '/create-post', component: CreatePost },
+    { path: '/posts', component: Posts }
 ]
