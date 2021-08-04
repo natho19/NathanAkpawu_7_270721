@@ -1,3 +1,11 @@
+.user-post {
+    margin-bottom: 25px;
+}
+
+.user-post:last-child {
+    margin-bottom: 0;
+}
+
 .user {
     display: flex;
     align-items: center;

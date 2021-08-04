@@ -1,5 +1,5 @@
 <template>
-    <b-col cols="10" md="6" class="card-post">
+    <div class="user-post">
         <div class="user">
             <div class="user-info">
                 <b-avatar :size="32"></b-avatar>
@@ -19,13 +19,13 @@
             <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
             <b-button variant="secondary"><b-icon-share-fill></b-icon-share-fill> Partager</b-button>
         </div>
-    </b-col>
+    </div>
 </template>
 
 <script>
     export default {
-        name: 'CardPost'
+        name: 'UserPost'
     }
 </script>
 
-<style scoped src="./CardPost.css"></style>
+<style scoped src="./UserPost.css"></style>

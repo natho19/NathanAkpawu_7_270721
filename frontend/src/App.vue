@@ -79,7 +79,7 @@
         margin-bottom: 25px;
     }
 
-    .card-form, .card-post {
+    .card-form, .user-post {
         background: #FFF;
         border: 1px solid #CED4DA;
         padding: 25px !important;
