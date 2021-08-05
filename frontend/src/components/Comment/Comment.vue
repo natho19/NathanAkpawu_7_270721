@@ -7,7 +7,7 @@
             </div>
             <div class="user-actions">
                 <b-button @click="modifyComment()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
-                <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                <b-button @click="deleteComment()" variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
             </div>
         </div>
         <div class="comment">
@@ -22,6 +22,9 @@
         methods: {
             modifyComment() {
                 this.$router.push('/post/1/modify-comment/1')
+            },
+            deleteComment() {
+                this.$router.push('/post/1/delete-comment/1')
             }
         }
     }
