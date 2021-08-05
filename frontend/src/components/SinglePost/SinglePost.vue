@@ -6,7 +6,7 @@
                 <h2>Nathan Akpawu</h2>
             </div>
             <div class="user-actions">
-                <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
+                <b-button @click="modifyPost()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
                 <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
             </div>
         </div>
@@ -20,7 +20,12 @@
 
 <script>
     export default {
-        name: 'SinglePost'
+        name: 'SinglePost',
+        methods: {
+            modifyPost() {
+                this.$router.push('/modify-post/1')
+            }
+        }
     }
 </script>
 

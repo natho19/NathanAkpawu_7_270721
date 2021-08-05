@@ -3,8 +3,9 @@ import Login from './views/users/Login'
 import ModifyUser from './views/users/Modify'
 import DeleteUser from './views/users/Delete'
 import CreatePost from './views/posts/Create'
-import Posts from './views/posts/Posts'
-import Single from './views/posts/Single'
+import AllPosts from './views/posts/Posts'
+import SinglePost from './views/posts/Single'
+import ModifyPost from './views/posts/Modify'
 
 export default [
     { path: '/', component: Login },
@@ -12,6 +13,7 @@ export default [
     { path: '/modify-user', component: ModifyUser },
     { path: '/delete-user', component: DeleteUser },
     { path: '/create-post', component: CreatePost },
-    { path: '/posts', component: Posts },
-    { path: '/post/:id', component: Single }
+    { path: '/posts', component: AllPosts },
+    { path: '/post/:id', component: SinglePost },
+    { path: '/modify-post/:id', component: ModifyPost }
 ]
