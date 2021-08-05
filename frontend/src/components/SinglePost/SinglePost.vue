@@ -7,7 +7,7 @@
             </div>
             <div class="user-actions">
                 <b-button @click="modifyPost()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
-                <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                <b-button @click="deletePost()" variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
             </div>
         </div>
         <div class="post">
@@ -24,6 +24,9 @@
         methods: {
             modifyPost() {
                 this.$router.push('/modify-post/1')
+            },
+            deletePost() {
+                this.$router.push('/delete-post/1')
             }
         }
     }
