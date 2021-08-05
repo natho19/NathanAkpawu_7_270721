@@ -1,0 +1,17 @@
+.card-groupomania {
+    margin-bottom: 15px;
+    padding: 20px !important;
+}
+
+.card-groupomania:last-child {
+    margin-bottom: 0;
+}
+
+.user {
+    margin-bottom: 10px;
+}
+
+.comment p {
+    font-size: 14.5px;
+    font-weight: 300;
+}

@@ -6,13 +6,11 @@
                 v-model="form.comment"
                 placeholder="Commentaire"
                 rows="4"
-                max-rows="8"
+                max-rows="6"
                 required
                 ></b-form-textarea>
             </b-form-group>
-            <div class="text-right">
-                <b-button type="submit" variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
-            </div>
+            <b-button type="submit" variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Envoyer</b-button>
         </b-form>
     </div>
 </template>

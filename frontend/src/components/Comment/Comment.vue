@@ -1,5 +1,5 @@
 <template>
-    <div class="single-post">
+    <div class="card-groupomania">
         <div class="user">
             <div class="user-info">
                 <b-avatar></b-avatar>
@@ -10,18 +10,16 @@
                 <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
             </div>
         </div>
-        <div class="post">
-            <h3 class="post-title">Lorem ipsum dolor sit</h3>
-            <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis blanditiis libero minima, sint est. Facere ea ducimus vitae omnis, harum nisi id soluta fugit tempore et. Sunt, voluptatibus quidem?</p>
-            <img src="../../assets/images/heart_eyes.gif" alt="Heart eyes" class="post-image">
+        <div class="comment">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illum distinctio similique consequuntur voluptatem magnam dicta ullam asperiores eaque accusantium?</p>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'SinglePost'
+        name: 'Comment'
     }
 </script>
 
-<style scoped src="./SinglePost.css"></style>
+<style scoped src="./Comment.css"></style>

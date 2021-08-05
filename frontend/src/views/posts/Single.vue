@@ -4,6 +4,10 @@
             <b-col cols="10" md="6">
                 <single-post></single-post>
                 <comment-form></comment-form>
+                <div class="card-groupomania">
+                    <comment></comment>
+                    <comment></comment>
+                </div>
             </b-col>
         </b-row>
     </b-container>
@@ -12,12 +16,14 @@
 <script>
     import SinglePost from '../../components/SinglePost/SinglePost.vue'
     import CommentForm from '../../components/CommentForm/CommentForm.vue'
+    import Comment from '../../components/Comment/Comment.vue'
 
     export default {
         name: 'Single',
         components: {
             'single-post': SinglePost,
-            'comment-form': CommentForm
+            'comment-form': CommentForm,
+            'comment': Comment
         }
     }
 </script>
