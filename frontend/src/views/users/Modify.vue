@@ -42,7 +42,7 @@
                         ></b-form-input>
                     </b-form-group>
                 
-                    <b-button type="submit" variant="primary"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
+                    <b-button type="submit" variant="success"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
                 </b-form>
             </b-col>
         </b-row>

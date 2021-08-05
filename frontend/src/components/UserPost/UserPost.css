@@ -44,14 +44,17 @@
 }
 
 .btn-circle {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50% !important;
+    line-height: 1 !important;
+    text-align: center;
 }
 
 .btn-circle .b-icon {
-    font-size: 18px !important;
-    margin-left: -2px !important;
+    width: 16px;
+    vertical-align: baseline;
+    margin-left: -4.5px;
 }
 
 .post {
