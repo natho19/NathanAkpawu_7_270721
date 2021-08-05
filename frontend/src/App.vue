@@ -71,7 +71,7 @@
 
     .content {
         flex: 1 0 auto;
-        background: #F9F9F9;
+        background: #F2F2F2;
         padding: 40px 0;
     }
 

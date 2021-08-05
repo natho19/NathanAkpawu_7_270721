@@ -20,6 +20,9 @@
                             <router-link to="/" class="nav-link" exact>Se connecter</router-link>
                         </li>
                         <b-button @click="addPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
+                        <li class="nav-item">
+                            <router-link to="/posts" class="nav-link" exact>Tous les posts</router-link>
+                        </li>
                         <b-nav-item-dropdown right>
                             <!-- Using 'button-content' slot -->
                             <template #button-content><b-icon-person-fill></b-icon-person-fill> Nathan Akpawu</template>

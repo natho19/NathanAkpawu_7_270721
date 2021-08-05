@@ -1,5 +1,5 @@
 <template>
-    <div class="card-groupomania">
+    <div class="card-groupomania bg-gray">
         <div class="user">
             <div class="user-info">
                 <b-avatar></b-avatar>
