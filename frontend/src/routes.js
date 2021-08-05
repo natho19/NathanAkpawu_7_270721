@@ -7,6 +7,7 @@ import AllPosts from './views/posts/Posts'
 import SinglePost from './views/posts/Single'
 import ModifyPost from './views/posts/Modify'
 import DeletePost from './views/posts/Delete'
+import ModifyComment from './views/comments/Modify'
 
 export default [
     { path: '/', component: Login },
@@ -17,5 +18,6 @@ export default [
     { path: '/posts', component: AllPosts },
     { path: '/post/:id', component: SinglePost },
     { path: '/modify-post/:id', component: ModifyPost },
-    { path: '/delete-post/:id', component: DeletePost }
+    { path: '/delete-post/:id', component: DeletePost },
+    { path: '/post/:postId/modify-comment/:id', component: ModifyComment }
 ]

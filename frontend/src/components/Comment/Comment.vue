@@ -6,7 +6,7 @@
                 <h2>Nathan Akpawu</h2>
             </div>
             <div class="user-actions">
-                <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
+                <b-button @click="modifyComment()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
                 <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
             </div>
         </div>
@@ -18,7 +18,12 @@
 
 <script>
     export default {
-        name: 'Comment'
+        name: 'Comment',
+        methods: {
+            modifyComment() {
+                this.$router.push('/post/1/modify-comment/1')
+            }
+        }
     }
 </script>
 

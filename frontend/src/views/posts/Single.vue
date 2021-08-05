@@ -3,7 +3,9 @@
         <b-row class="justify-content-center">
             <b-col cols="10" md="6">
                 <single-post></single-post>
-                <comment-form></comment-form>
+                <div class="card-groupomania">
+                    <comment-form></comment-form>
+                </div>
                 <div class="card-groupomania">
                     <comment></comment>
                     <comment></comment>
