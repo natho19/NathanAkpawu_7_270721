@@ -4,3 +4,7 @@
     padding: 25px !important;
     margin-bottom: 25px;
 }
+
+.single-post .post {
+    margin-bottom: 0;
+}

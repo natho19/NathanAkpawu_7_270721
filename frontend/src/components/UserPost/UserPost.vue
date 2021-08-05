@@ -20,7 +20,7 @@
             </a>
         </div>
         <div class="comment">
-            <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
+            <b-button variant="primary" @click="singlePost()"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
             <b-button variant="secondary"><b-icon-share-fill></b-icon-share-fill> Partager</b-button>
         </div>
     </div>
