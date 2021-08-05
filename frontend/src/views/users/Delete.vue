@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <b-row class="justify-content-center">
-            <b-col cols="10" md="6" class="card-form">
+            <b-col cols="10" md="6" class="card-groupomania">
                 <h1><b-icon-trash-fill></b-icon-trash-fill> Supprimer mon compte</h1>
                 <p>Êtes-vous vraiment sûr de vouloir supprimer votre compte ? Cette action est irréversible.</p>
                 <b-button variant="danger"><b-icon-trash-fill></b-icon-trash-fill> Supprimer</b-button>

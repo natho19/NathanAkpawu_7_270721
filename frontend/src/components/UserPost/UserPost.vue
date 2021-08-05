@@ -11,11 +11,11 @@
             </div>
         </div>
         <div class="post">
-            <a href="#" class="post-link">
+            <a @click="singlePost()" class="post-link">
                 <h3 class="post-title">Lorem ipsum dolor sit</h3>
             </a>
             <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis blanditiis libero minima, sint est. Facere ea ducimus vitae omnis, harum nisi id soluta fugit tempore et. Sunt, voluptatibus quidem?</p>
-            <a href="#">
+            <a @click="singlePost()">
                 <img src="../../assets/images/heart_eyes.gif" alt="Heart eyes" class="post-image">
             </a>
         </div>
@@ -28,8 +28,13 @@
 
 <script>
     export default {
-        name: 'UserPost'
+        name: 'UserPost',
+        methods: {
+            singlePost() {
+                this.$router.push('/post/1')
+            }
+        }
     }
 </script>
 
-<style scoped src="./UserPost.css"></style>
+<style src="./UserPost.css"></style>

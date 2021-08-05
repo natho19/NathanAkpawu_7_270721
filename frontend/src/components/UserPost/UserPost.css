@@ -1,4 +1,7 @@
 .user-post {
+    background: #FFF;
+    border: 1px solid #CED4DA;
+    padding: 25px !important;
     margin-bottom: 25px;
 }
 
@@ -43,7 +46,7 @@
 .btn-circle {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 50% !important;
 }
 
 .btn-circle .b-icon {
@@ -55,6 +58,10 @@
     margin-bottom: 20px;
 }
 
+.post a {
+    cursor: pointer;
+}
+
 .post-link {
     text-decoration: none;
     color: #FD2D01;
@@ -63,6 +70,7 @@
 
 .post-link:hover {
     text-decoration: underline;
+    color: #FD2D01;
 }
 
 .post-title {

@@ -79,13 +79,13 @@
         margin-bottom: 25px;
     }
 
-    .card-form, .user-post {
+    .card-groupomania {
         background: #FFF;
         border: 1px solid #CED4DA;
         padding: 25px !important;
     }
 
-    .card-form h1 {
+    .card-groupomania h1 {
         font-size: 1.8rem;
         margin-bottom: 25px;
         color: #FD2D01;

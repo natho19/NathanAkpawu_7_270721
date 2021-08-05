@@ -2,21 +2,19 @@
     <b-container>
         <b-row class="justify-content-center">
             <b-col cols="10" md="6">
-                <user-post></user-post>
-                <user-post></user-post>
-                <user-post></user-post>
+                <single-post></single-post>
             </b-col>
         </b-row>
     </b-container>
 </template>
 
 <script>
-    import UserPost from '../../components/UserPost/UserPost.vue'
+    import SinglePost from '../../components/SinglePost/SinglePost.vue'
 
     export default {
-        name: 'Posts',
+        name: 'Single',
         components: {
-            'user-post': UserPost,
+            'single-post': SinglePost,
         }
     }
 </script>

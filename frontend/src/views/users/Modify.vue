@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <b-row class="justify-content-center">
-            <b-col cols="10" md="6" class="card-form">
+            <b-col cols="10" md="6" class="card-groupomania">
                 <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier mon compte</h1>
 
                 <b-form @submit="onSubmit" class="form">
