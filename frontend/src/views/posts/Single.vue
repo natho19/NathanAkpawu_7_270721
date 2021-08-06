@@ -1,18 +1,14 @@
 <template>
-    <b-container>
-        <b-row class="justify-content-center">
-            <b-col cols="10" md="6">
-                <single-post></single-post>
-                <div class="card-groupomania">
-                    <comment-form></comment-form>
-                </div>
-                <div class="card-groupomania">
-                    <comment></comment>
-                    <comment></comment>
-                </div>
-            </b-col>
-        </b-row>
-    </b-container>
+    <div class="single">
+        <single-post></single-post>
+        <div class="card-groupomania">
+            <comment-form></comment-form>
+        </div>
+        <div class="card-groupomania">
+            <comment></comment>
+            <comment></comment>
+        </div>
+    </div>
 </template>
 
 <script>

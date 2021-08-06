@@ -1,13 +1,9 @@
 <template>
-    <b-container>
-        <b-row class="justify-content-center">
-            <b-col cols="10" md="6" class="card-groupomania">
-                <h1><b-icon-trash-fill></b-icon-trash-fill> Supprimer ce post</h1>
-                <p>Êtes-vous vraiment sûr de vouloir supprimer ce post ? Cette action est irréversible.</p>
-                <b-button variant="danger"><b-icon-trash-fill></b-icon-trash-fill> Supprimer</b-button>
-            </b-col>
-        </b-row>
-    </b-container>
+    <div class="card-groupomania">
+        <h1><b-icon-trash-fill></b-icon-trash-fill> Supprimer le post</h1>
+        <p>Voulez-vous vraiment supprimer ce post ? Cette action est irréversible...</p>
+        <b-button variant="danger"><b-icon-trash-fill></b-icon-trash-fill> Supprimer</b-button>
+    </div>
 </template>
 
 <script>

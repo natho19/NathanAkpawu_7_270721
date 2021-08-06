@@ -1,13 +1,9 @@
 <template>
-    <b-container>
-        <b-row class="justify-content-center">
-            <b-col cols="10" md="6">
-                <user-post></user-post>
-                <user-post></user-post>
-                <user-post></user-post>
-            </b-col>
-        </b-row>
-    </b-container>
+    <div class="users-posts">
+        <user-post></user-post>
+        <user-post></user-post>
+        <user-post></user-post>
+    </div>
 </template>
 
 <script>

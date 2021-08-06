@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top">
             <b-container>
                 <b-navbar variant="faded" type="light">
-                    <b-navbar-brand href="#">
+                    <b-navbar-brand @click="viewPosts()" href="#">
                         <img src="../../assets/images/logo.svg" class="d-inline-block align-top logo" alt="Groupomania">
                     </b-navbar-brand>
                 </b-navbar>
@@ -11,7 +11,6 @@
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                 <b-collapse id="nav-collapse" is-nav>
-                    <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
                         <li class="nav-item">
                             <router-link to="/signup" class="nav-link">S'inscrire</router-link>
@@ -19,12 +18,11 @@
                         <li class="nav-item">
                             <router-link to="/" class="nav-link" exact>Se connecter</router-link>
                         </li>
-                        <b-button @click="addPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
+                        <b-button @click="createPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
                         <li class="nav-item">
                             <router-link to="/posts" class="nav-link" exact>Tous les posts</router-link>
                         </li>
                         <b-nav-item-dropdown right>
-                            <!-- Using 'button-content' slot -->
                             <template #button-content><b-icon-person-fill></b-icon-person-fill> Nathan Akpawu</template>
                             <li>
                                 <router-link to="/modify-user" class="dropdown-item">
@@ -52,10 +50,13 @@
     export default {
         name: 'Header',
         methods: {
-            logout() {
+            viewPosts: function() {
+                this.$router.push('/posts')
+            },
+            logout: function() {
                 this.$router.push('/');
             },
-            addPost() {
+            createPost: function() {
                 this.$router.push('/create-post');
             }
         }

@@ -2,7 +2,13 @@
     <div id="app">
         <header-top></header-top>
         <div class="content">
-            <router-view></router-view>
+            <b-container>
+                <b-row class="justify-content-center">
+                    <b-col cols="10" md="6">
+                        <router-view></router-view>
+                    </b-col>
+                </b-row>
+            </b-container>
         </div>
         <footer-bottom></footer-bottom>
     </div>
