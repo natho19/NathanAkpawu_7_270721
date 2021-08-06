@@ -19,7 +19,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'Modify',
         data() {
@@ -32,5 +31,4 @@
     }
 </script>
 
-<style scoped>
-</style>
+<style></style>

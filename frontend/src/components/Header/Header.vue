@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top">
             <b-container>
                 <b-navbar variant="faded" type="light">
-                    <b-navbar-brand @click="viewPosts()" href="#">
+                    <b-navbar-brand>
                         <img src="../../assets/images/logo.svg" class="d-inline-block align-top logo" alt="Groupomania">
                     </b-navbar-brand>
                 </b-navbar>
@@ -50,9 +50,6 @@
     export default {
         name: 'Header',
         methods: {
-            viewPosts: function() {
-                this.$router.push('/posts')
-            },
             logout: function() {
                 this.$router.push('/');
             },

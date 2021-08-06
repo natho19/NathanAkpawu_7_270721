@@ -4,7 +4,7 @@
         <div class="content">
             <b-container>
                 <b-row class="justify-content-center">
-                    <b-col cols="10" md="6">
+                    <b-col cols="10" md="7">
                         <router-view></router-view>
                     </b-col>
                 </b-row>
