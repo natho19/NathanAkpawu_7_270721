@@ -12,15 +12,7 @@
                 autofocus
                 ></b-form-input>
             </b-form-group>
-
-            <b-form-group label="Prénom" label-for="firstname">
-                <b-form-input
-                v-model="form.firstname"
-                placeholder="Entrer votre prénom"
-                required
-                ></b-form-input>
-            </b-form-group>
-
+        
             <b-form-group label="Email" label-for="email">
                 <b-form-input
                 id="email"
@@ -39,29 +31,54 @@
                 required
                 ></b-form-input>
             </b-form-group>
-        
-            <b-button type="submit" variant="primary"><b-icon-person-plus-fill></b-icon-person-plus-fill> S'inscrire</b-button>
+
+            <b-alert v-if="status == 'error_create'" variant="danger" show><b-icon-exclamation-triangle></b-icon-exclamation-triangle> Adresse email déjà utilisée</b-alert>
+
+            <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-person-plus-fill></b-icon-person-plus-fill>
+                <span v-if="status == 'loading'"> Inscription en cours...</span>
+                <span v-else> S'inscrire</span>
+            </b-button>
         </b-form>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'Signup',
         data() {
             return {
                 form: {
                     name: '',
-                    firstname: '',
                     email: '',
                     password: ''
                 }
             }
         },
+        computed: {
+            requiredFields: function() {
+                if (this.form.name != '' && this.form.email != '' && this.form.password != '' ) {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            ...mapState(['status'])
+        },
         methods: {
             onSubmit(event) {
-                event.preventDefault()
-                console.log(JSON.stringify(this.form))
+                event.preventDefault();
+                const self = this;
+                this.$store.dispatch('createAccount', {
+                    name: this.form.name,
+                    email: this.form.email,
+                    password: this.form.password
+                }).then(function() {
+                    self.$router.push('/');
+                }, function(error) {
+                    console.log(error);
+                })
             }
         }
     }

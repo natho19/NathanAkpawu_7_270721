@@ -81,8 +81,13 @@
         padding: 40px 0;
     }
 
-    .form-group {
-        margin-bottom: 25px;
+    .form-group, .alert {
+        margin-bottom: 25px !important;
+    }
+
+    .alert {
+        font-weight: 900;
+        font-size: 15px;
     }
 
     .card-groupomania {

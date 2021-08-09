@@ -22,13 +22,20 @@
                 required
                 ></b-form-input>
             </b-form-group>
+
+            <b-alert v-if="status == 'error_login'" variant="danger" show><b-icon-exclamation-triangle></b-icon-exclamation-triangle> Adresse email et/ou mot de passe invalide</b-alert>
         
-            <b-button type="submit" variant="primary"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right> Se connecter</b-button>
+            <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right>
+                <span v-if="status == 'loading'"> Connexion en cours...</span>
+                <span v-else> Se connecter</span>
+            </b-button>
         </b-form>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'Login',
         data() {
@@ -39,10 +46,28 @@
                 }
             }
         },
+        computed: {
+            requiredFields: function() {
+                if (this.form.email != '' && this.form.password != '' ) {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            ...mapState(['status'])
+        },
         methods: {
             onSubmit(event) {
-                event.preventDefault()
-                console.log(JSON.stringify(this.form))
+                event.preventDefault();
+                const self = this;
+                this.$store.dispatch('login', {
+                    email: this.form.email,
+                    password: this.form.password
+                }).then(function() {
+                    self.$router.push('/posts')
+                }, function(error) {
+                    console.log(error);
+                })
             }
         }
     }

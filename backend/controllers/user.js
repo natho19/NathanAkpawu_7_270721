@@ -13,7 +13,6 @@ exports.signup = (req, res) => {
         .then(hash => {
             const user = {
                 name: req.body.name,
-                firstname: req.body.firstname,
                 email: maskdata.maskEmail2(req.body.email),
                 password: hash
             };
