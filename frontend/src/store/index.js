@@ -19,7 +19,7 @@ if (!user) {
     user = defaultUser;
 } else {
     try {
-        const user = JSON.parse(user);
+        user = JSON.parse(user);
         instance.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
     } catch(exception) {
         user = defaultUser;
@@ -46,15 +46,16 @@ export default new Vuex.Store({
 
         LOG_OUT: function(state) {
             state.user = defaultUser;
+            state.userInfos = {}
         },
 
         USER_INFOS: function(state, userInfos) {
             state.userInfos = userInfos;
         },
-
-        UPDATE_NAME: function(state, name) {
-            state.userInfos.name = name
-        },
+        
+        SET_USER: function(state, newInfos) {
+            state.userInfos = newInfos;
+        }
     },
 
     actions: {
@@ -103,6 +104,10 @@ export default new Vuex.Store({
             commit('LOG_OUT');
             commit('SET_STATUS', '');
             localStorage.removeItem('user');
-        }
+        },
+
+        // editUser({ commit, state }) {
+            
+        // }
     }
 })
