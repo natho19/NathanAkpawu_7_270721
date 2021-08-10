@@ -53,8 +53,8 @@ export default new Vuex.Store({
             state.userInfos = userInfos;
         },
         
-        SET_USER: function(state, newInfos) {
-            state.userInfos = newInfos;
+        SET_USER_NAME: function(state, newName) {
+            state.userInfos.name = newName;
         }
     },
 
@@ -90,6 +90,12 @@ export default new Vuex.Store({
             });
         },
 
+        logout({ commit }) {
+            commit('LOG_OUT');
+            commit('SET_STATUS', '');
+            localStorage.removeItem('user');
+        },
+
         getUserInfos({ commit, state }) {
             instance.get(`auth/user/${state.user.userId}`)
                 .then(function(response) {
@@ -100,14 +106,14 @@ export default new Vuex.Store({
                 });
         },
 
-        logout({ commit }) {
-            commit('LOG_OUT');
-            commit('SET_STATUS', '');
-            localStorage.removeItem('user');
-        },
-
-        // editUser({ commit, state }) {
-            
-        // }
+        editUserName({ state }, userNewName) {
+            instance.put(`auth/user/${state.user.userId}`, userNewName)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+        }
     }
 })

@@ -47,8 +47,8 @@
                 get() {
                     return this.$store.state.userInfos.name;
                 },
-                set(value) {
-                    this.$store.commit('UPDATE_NAME', value)
+                set(newName) {
+                    this.$store.commit('SET_USER_NAME', newName)
                 }
             },
             email: {
@@ -60,7 +60,9 @@
         methods: {
             onSubmit(event) {
                 event.preventDefault()
-                console.log(this.name)
+                this.$store.dispatch('editUserName', {
+                    name: this.name
+                })
             }
         }
     }

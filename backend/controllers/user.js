@@ -67,3 +67,17 @@ exports.getOneUser = (req, res) => {
         })
         .catch(error => res.status(500).json({ message: 'Impossible de trouver cet utilisateur', error }));
 }
+
+// Modifier un user
+exports.modifyUser = (req, res) => {
+    const userId = req.params.id;
+
+    const updatedUser = {
+        name: req.body.name
+    }
+    
+    User.update(updatedUser, { where: { id: userId } })
+        .then(() => res.status(200).json({ message: 'Utilisateur modifié avec succès' }))
+        .catch(error => res.status(400).json({ message: 'Impossible de modifier cet utilisateur', error }));
+
+}

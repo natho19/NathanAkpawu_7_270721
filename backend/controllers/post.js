@@ -40,7 +40,7 @@ exports.modifyPost = (req, res) => {
     const id = req.params.id;
     const userId = req.body.userId
 
-    var updatedPost = {
+    const updatedPost = {
         title: req.body.title,
         content: req.body.content,
         imageUrl: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null
