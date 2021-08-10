@@ -52,3 +52,18 @@ exports.login = (req, res) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+
+// Afficher un user
+exports.getOneUser = (req, res) => {
+    const userId = req.params.id;
+
+    User.findByPk(userId)
+        .then(user => {
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ message: 'Utilisateur non trouvé' });
+            }
+        })
+        .catch(error => res.status(500).json({ message: 'Impossible de trouver cet utilisateur', error }));
+}

@@ -6,15 +6,7 @@
             <b-form-group label="Nom" label-for="name">
                 <b-form-input
                 id="name"
-                v-model="form.name"
-                required
-                ></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Prénom" label-for="firstname">
-                <b-form-input
-                v-model="form.firstname"
-                placeholder="Entrer votre prénom"
+                v-model="name"
                 required
                 ></b-form-input>
             </b-form-group>
@@ -22,46 +14,53 @@
             <b-form-group label="Email" label-for="email">
                 <b-form-input
                 id="email"
-                v-model="form.email"
-                placeholder="Entrer votre email"
+                :value="email"
                 type="email"
                 required
                 disabled
                 ></b-form-input>
             </b-form-group>
-
-            <b-form-group label="Mot de passe" label-for="password">
-                <b-form-input
-                v-model="form.password"
-                placeholder="Entrer votre mot de passe"
-                type="password"
-                required
-                disabled
-                ></b-form-input>
-            </b-form-group>
         
-            <b-button type="submit" variant="success"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
+            <b-button type="submit" variant="success" :class="{ 'disabled' : !requiredFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'Modify',
-        data() {
-            return {
-                form: {
-                    name: 'Akpawu',
-                    firstname: 'Nathan',
-                    email: 'nakpawu@gmail.com',
-                    password: '****'
+        mounted: function() {
+            if (this.$store.state.user.userId == -1) {
+                this.$router.push('/');
+                return;
+            }
+            this.$store.dispatch('getUserInfos');
+        },
+        computed: {
+            requiredFields: function() {
+                if (this.name != '') {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            name: {
+                get() {
+                    return this.$store.state.userInfos.name;
+                },
+                set(value) {
+                    this.$store.commit('UPDATE_NAME', value)
+                }
+            },
+            email: {
+                get() {
+                    return this.$store.state.userInfos.email;
                 }
             }
         },
         methods: {
             onSubmit(event) {
                 event.preventDefault()
-                console.log(JSON.stringify(this.form))
+                console.log(this.name)
             }
         }
     }

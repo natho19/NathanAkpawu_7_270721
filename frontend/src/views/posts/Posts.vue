@@ -15,9 +15,9 @@
             'user-post': UserPost,
         },
         mounted: function() {
-            console.log(this.$store.state.user.userId);
             if (this.$store.state.user.userId == -1) {
                 this.$router.push('/');
+                return;
             }
         }
     }

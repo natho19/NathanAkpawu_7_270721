@@ -8,14 +8,29 @@ const instance = axios.create({
 
 Vue.use(Vuex)
 
+const defaultUser = {
+    userId: -1,
+    token: ''
+}
+
+let user = localStorage.getItem('user');
+
+if (!user) {
+    user = defaultUser;
+} else {
+    try {
+        const user = JSON.parse(user);
+        instance.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+    } catch(exception) {
+        user = defaultUser;
+    }
+}
+
 export default new Vuex.Store({
     state: {
         status: '',
-        user: {
-            userId: -1,
-            token: ''
-        },
-        error: ''
+        user: user,
+        userInfos: {}
     },
 
     mutations: {
@@ -24,8 +39,22 @@ export default new Vuex.Store({
         },
 
         LOG_USER: function(state, user) {
+            instance.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+            localStorage.setItem('user', JSON.stringify(user));
             state.user = user;
-        }
+        },
+
+        LOG_OUT: function(state) {
+            state.user = defaultUser;
+        },
+
+        USER_INFOS: function(state, userInfos) {
+            state.userInfos = userInfos;
+        },
+
+        UPDATE_NAME: function(state, name) {
+            state.userInfos.name = name
+        },
     },
 
     actions: {
@@ -58,6 +87,22 @@ export default new Vuex.Store({
                         reject(error);
                     })
             });
+        },
+
+        getUserInfos({ commit }) {
+            instance.get(`auth/user/${this.state.user.userId}`)
+                .then(function(response) {
+                    commit('USER_INFOS', response.data);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        },
+
+        logout({ commit }) {
+            commit('LOG_OUT');
+            commit('SET_STATUS', '');
+            localStorage.removeItem('user');
         }
     }
 })

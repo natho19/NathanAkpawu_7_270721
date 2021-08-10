@@ -12,17 +12,17 @@
 
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav class="ml-auto">
-                        <li class="nav-item">
+                        <li v-if="status != 'login'" class="nav-item">
                             <router-link to="/signup" class="nav-link">S'inscrire</router-link>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="status != 'login'" class="nav-item">
                             <router-link to="/" class="nav-link" exact>Se connecter</router-link>
                         </li>
-                        <b-button @click="createPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
-                        <li class="nav-item">
+                        <b-button v-if="status == 'login'" @click="createPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
+                        <li v-if="status == 'login'" class="nav-item">
                             <router-link to="/posts" class="nav-link" exact>Tous les posts</router-link>
                         </li>
-                        <b-nav-item-dropdown right>
+                        <b-nav-item-dropdown v-if="status == 'login'" right>
                             <template #button-content><b-icon-person-fill></b-icon-person-fill> Nathan Akpawu</template>
                             <li>
                                 <router-link to="/modify-user" class="dropdown-item">
@@ -47,10 +47,16 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'Header',
+        computed: {
+            ...mapState(['status'])
+        },
         methods: {
             logout: function() {
+                this.$store.dispatch('logout');
                 this.$router.push('/');
             },
             createPost: function() {

@@ -38,6 +38,12 @@
 
     export default {
         name: 'Login',
+        mounted: function() {
+            if (this.$store.state.user.userId != -1) {
+                this.$router.push('/posts');
+                return;
+            }
+        },
         data() {
             return {
                 form: {
