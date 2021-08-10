@@ -89,8 +89,8 @@ export default new Vuex.Store({
             });
         },
 
-        getUserInfos({ commit }) {
-            instance.get(`auth/user/${this.state.user.userId}`)
+        getUserInfos({ commit, state }) {
+            instance.get(`auth/user/${state.user.userId}`)
                 .then(function(response) {
                     commit('USER_INFOS', response.data);
                 })

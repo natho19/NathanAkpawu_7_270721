@@ -73,7 +73,7 @@
                     self.$router.push('/posts')
                 }, function(error) {
                     console.log(error);
-                })
+                });
             }
         }
     }

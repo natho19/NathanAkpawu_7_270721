@@ -23,7 +23,7 @@
                             <router-link to="/posts" class="nav-link" exact>Tous les posts</router-link>
                         </li>
                         <b-nav-item-dropdown v-if="status == 'login'" right>
-                            <template #button-content><b-icon-person-fill></b-icon-person-fill> Nathan Akpawu</template>
+                            <template #button-content><b-icon-person-fill></b-icon-person-fill> Mon compte</template>
                             <li>
                                 <router-link to="/modify-user" class="dropdown-item">
                                     <b-icon-pencil-fill></b-icon-pencil-fill> Modifier
@@ -52,7 +52,9 @@
     export default {
         name: 'Header',
         computed: {
-            ...mapState(['status'])
+            ...mapState({
+                status: 'status'
+            })
         },
         methods: {
             logout: function() {
