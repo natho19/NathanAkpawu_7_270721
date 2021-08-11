@@ -107,20 +107,20 @@ export default new Vuex.Store({
         },
 
         editUserName({ state }, userNewName) {
-            instance.put(`auth/user/${state.user.userId}`, userNewName)
+            instance.put(`auth/user/${state.userInfos.id}`, userNewName)
                 .then(response => {
                     console.log(response.data)
+                    window.location.reload()
                 })
                 .catch(function(error) {
                     console.log(error);
                 })
         },
 
-        deleteUser({ commit, state }) {
-            instance.delete(`auth/user/${state.userInfos.userId}`)
+        deleteUser({ state }) {
+            instance.delete(`auth/user/${state.userInfos.id}`)
                 .then(response => {
-                    console.log(response);
-                    commit('LOG_OUT');
+                    console.log(response.data);
                 })
                 .catch(function(error) {
                     console.log(error);

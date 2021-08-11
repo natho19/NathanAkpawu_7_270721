@@ -19,6 +19,8 @@
         methods: {
             deleteUser() {
                 this.$store.dispatch('deleteUser');
+                this.$store.dispatch('logout');
+                this.$router.push('/');
             }
         }
     }
