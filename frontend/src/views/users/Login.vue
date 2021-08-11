@@ -66,6 +66,7 @@
             onSubmit(event) {
                 event.preventDefault();
                 const self = this;
+    
                 this.$store.dispatch('login', {
                     email: this.form.email,
                     password: this.form.password

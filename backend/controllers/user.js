@@ -60,7 +60,12 @@ exports.getOneUser = (req, res) => {
     User.findByPk(userId)
         .then(user => {
             if (user) {
-                res.status(200).json(user);
+                res.status(200).json({
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin
+                });
             } else {
                 res.status(404).json({ message: 'Utilisateur non trouvé' });
             }

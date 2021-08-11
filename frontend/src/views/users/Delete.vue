@@ -9,6 +9,7 @@
 <script>
     export default {
         name: 'Delete',
+        
         mounted: function() {
             if (this.$store.state.user.userId == -1) {
                 this.$router.push('/');
@@ -18,9 +19,15 @@
         },
         methods: {
             deleteUser() {
-                this.$store.dispatch('deleteUser');
-                this.$store.dispatch('logout');
-                this.$router.push('/');
+                const self = this;
+
+                this.$store.dispatch('deleteUser')
+                    .then(function() {
+                        self.$store.dispatch('logout');
+                        self.$router.push('/');
+                    }, function(error) {
+                        console.log(error);
+                    });
             }
         }
     }

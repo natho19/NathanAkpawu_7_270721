@@ -60,9 +60,14 @@
         methods: {
             onSubmit(event) {
                 event.preventDefault()
-                this.$store.dispatch('editUserName', {
-                    name: this.name
-                })
+                
+                this.$store.dispatch('editUserName', { 
+                    name: this.name 
+                }).then(function() {
+                    window.location.reload()
+                }, function(error) {
+                    console.log(error);
+                });
             }
         }
     }

@@ -97,34 +97,40 @@ export default new Vuex.Store({
         },
 
         getUserInfos({ commit, state }) {
-            instance.get(`auth/user/${state.user.userId}`)
-                .then(function(response) {
-                    commit('USER_INFOS', response.data);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            return new Promise((resolve, reject) => {
+                instance.get(`auth/user/${state.user.userId}`)
+                    .then(function(response) {
+                        commit('USER_INFOS', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
         },
 
         editUserName({ state }, userNewName) {
-            instance.put(`auth/user/${state.userInfos.id}`, userNewName)
-                .then(response => {
-                    console.log(response.data)
-                    window.location.reload()
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
+            return new Promise((resolve, reject) => {
+                instance.put(`auth/user/${state.userInfos.id}`, userNewName)
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
         },
 
         deleteUser({ state }) {
-            instance.delete(`auth/user/${state.userInfos.id}`)
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
+            return new Promise((resolve, reject) => {
+                instance.delete(`auth/user/${state.userInfos.id}`)
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
         }
     }
 })

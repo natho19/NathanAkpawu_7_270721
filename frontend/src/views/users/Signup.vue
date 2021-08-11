@@ -70,6 +70,7 @@
             onSubmit(event) {
                 event.preventDefault();
                 const self = this;
+
                 this.$store.dispatch('createAccount', {
                     name: this.form.name,
                     email: this.form.email,
