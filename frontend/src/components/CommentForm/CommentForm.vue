@@ -1,5 +1,5 @@
 <template>     
-    <b-form class="form" @submit="onSubmit">
+    <b-form class="form" @submit.prevent="onSubmit">
         <b-form-group>
             <b-form-textarea
             v-model="form.comment"
@@ -24,8 +24,7 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault()
+            onSubmit() {
                 console.log(this.form)
             }
         }

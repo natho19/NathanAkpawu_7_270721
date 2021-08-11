@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right> Se connecter</h1>
 
-        <b-form @submit="onSubmit" class="form">
+        <b-form @submit.prevent="onSubmit" class="form">
             <b-form-group>
                 <b-form-input
                 id="email"
@@ -63,8 +63,7 @@
             ...mapState(['status'])
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault();
+            onSubmit() {
                 const self = this;
     
                 this.$store.dispatch('login', {

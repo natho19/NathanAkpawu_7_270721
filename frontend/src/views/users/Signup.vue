@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-person-plus-fill></b-icon-person-plus-fill> S'inscrire en quelques secondes...</h1>
 
-        <b-form @submit="onSubmit" class="form">
+        <b-form @submit.prevent="onSubmit" class="form">
             <b-form-group label="Nom" label-for="name">
                 <b-form-input
                 id="name"
@@ -67,8 +67,7 @@
             ...mapState(['status'])
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault();
+            onSubmit() {
                 const self = this;
 
                 this.$store.dispatch('createAccount', {

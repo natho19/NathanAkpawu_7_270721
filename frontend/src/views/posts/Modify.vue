@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le post</h1>
 
-        <b-form @submit="onSubmit" class="form">
+        <b-form @submit.prevent="onSubmit" class="form">
             <b-form-group>
                 <b-form-input
                 v-model="form.title"
@@ -44,8 +44,7 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault()
+            onSubmit() {
                 console.log(JSON.stringify(this.form))
             }
         }

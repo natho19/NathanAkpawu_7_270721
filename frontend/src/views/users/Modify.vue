@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le compte</h1>
 
-        <b-form @submit="onSubmit" class="form">
+        <b-form @submit.prevent="onSubmit" class="form">
             <b-form-group label="Nom" label-for="name">
                 <b-form-input
                 id="name"
@@ -58,9 +58,7 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault()
-                
+            onSubmit() {
                 this.$store.dispatch('editUserName', { 
                     name: this.name 
                 }).then(function() {

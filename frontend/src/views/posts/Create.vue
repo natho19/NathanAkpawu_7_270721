@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier un post</h1>
 
-        <b-form @submit="onSubmit" class="form">
+        <b-form @submit.prevent="onSubmit" class="form">
             <b-form-group>
                 <b-form-input
                 v-model="form.title"
@@ -34,6 +34,13 @@
 <script>
     export default {
         name: 'Create',
+        mounted: function() {
+            if (this.$store.state.user.userId == -1) {
+                console.log(this.$store.state.user)
+                this.$router.push('/');
+                return;
+            }
+        },
         data() {
             return {
                 form: {
@@ -44,8 +51,7 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault()
+            onSubmit() {
                 console.log(this.form)
             }
         }
