@@ -30,7 +30,8 @@ export default new Vuex.Store({
     state: {
         status: '',
         user: user,
-        userInfos: {}
+        userInfos: {},
+        posts: []
     },
 
     mutations: {
@@ -55,6 +56,10 @@ export default new Vuex.Store({
         
         SET_USER_NAME: function(state, newName) {
             state.userInfos.name = newName;
+        },
+
+        POSTS_LIST: function(state, posts) {
+            state.posts = posts;
         }
     },
 
@@ -130,6 +135,19 @@ export default new Vuex.Store({
                     .catch(function(error) {
                         reject(error);
                     })
+            });
+        },
+
+        getPosts({ commit }) {
+            return new Promise((resolve, reject) => {
+                instance.get('posts')
+                    .then(function(response) {
+                        commit('POSTS_LIST', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
             });
         }
     }

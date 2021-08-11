@@ -3,16 +3,16 @@
         <div class="user">
             <div class="user-info">
                 <b-avatar></b-avatar>
-                <h2>Nathan Akpawu</h2>
+                <h2>{{ post.User.name }}</h2>
             </div>
         </div>
         <div class="post">
             <a @click="singlePost()" class="post-link">
-                <h3 class="post-title">Lorem ipsum dolor sit</h3>
+                <h3 class="post-title">{{ post.title }}</h3>
             </a>
-            <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis blanditiis libero minima, sint est. Facere ea ducimus vitae omnis, harum nisi id soluta fugit tempore et. Sunt, voluptatibus quidem?</p>
+            <p class="post-content">{{ post.content }}</p>
             <a @click="singlePost()">
-                <img src="../../assets/images/heart_eyes.gif" alt="Heart eyes" class="post-image">
+                <img :src="post.imageUrl" :alt="post.title" class="post-image">
             </a>
         </div>
         <div class="comment">
@@ -25,11 +25,14 @@
 <script>
     export default {
         name: 'UserPost',
+        props: {
+            post: Object
+        },
         methods: {
             singlePost() {
-                this.$router.push('/post/1')
+                this.$router.push(`/post/${this.post.id}`)
             }
-        }
+        },
     }
 </script>
 

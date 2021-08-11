@@ -1,13 +1,12 @@
 <template>
     <div class="users-posts">
-        <user-post></user-post>
-        <user-post></user-post>
-        <user-post></user-post>
+        <user-post v-bind:post="post" v-for="post in posts" :key="post.id"></user-post>
     </div>
 </template>
 
 <script>
     import UserPost from '../../components/UserPost/UserPost.vue'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'Posts',
@@ -20,7 +19,13 @@
                 this.$router.push('/');
                 return;
             }
-        }
+            this.$store.dispatch('getPosts');
+        },
+        computed: {
+            ...mapState({
+                posts: 'posts'
+            })
+        },
     }
 </script>
 
