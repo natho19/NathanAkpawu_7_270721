@@ -57,9 +57,7 @@
             }
         },
         computed: {
-            ...mapState({
-                status: 'status'
-            })
+            ...mapState(['status'])
         },
         methods: {
             logout: function() {

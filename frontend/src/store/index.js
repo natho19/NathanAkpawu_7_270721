@@ -114,6 +114,17 @@ export default new Vuex.Store({
                 .catch(function(error) {
                     console.log(error);
                 })
+        },
+
+        deleteUser({ commit, state }) {
+            instance.delete(`auth/user/${state.userInfos.userId}`)
+                .then(response => {
+                    console.log(response);
+                    commit('LOG_OUT');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
         }
     }
 })
