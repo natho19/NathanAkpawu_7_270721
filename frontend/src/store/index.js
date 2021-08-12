@@ -60,6 +60,10 @@ export default new Vuex.Store({
 
         POSTS_LIST: function(state, posts) {
             state.posts = posts;
+        },
+
+        CREATE_POST: function(state, newPost) {
+            state.posts.unshift(newPost);
         }
     },
 
@@ -143,6 +147,19 @@ export default new Vuex.Store({
                 instance.get('posts')
                     .then(function(response) {
                         commit('POSTS_LIST', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
+        },
+
+        createPost({ commit }, file) {
+            return new Promise((resolve, reject) => {
+                instance.post('posts', file, {'Content-Type': 'application/form-data'})
+                    .then(function(response) {
+                        commit('CREATE_POST', response.data);
                         resolve(response);
                     })
                     .catch(function(error) {

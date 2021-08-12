@@ -10,8 +10,8 @@
             <a @click="singlePost()" class="post-link">
                 <h3 class="post-title">{{ post.title }}</h3>
             </a>
-            <p class="post-content">{{ post.content }}</p>
-            <a @click="singlePost()">
+            <p v-if="post.content" class="post-content">{{ post.content }}</p>
+            <a v-if="post.imageUrl" @click="singlePost()">
                 <img :src="post.imageUrl" :alt="post.title" class="post-image">
             </a>
         </div>

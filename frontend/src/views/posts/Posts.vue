@@ -20,6 +20,7 @@
                 return;
             }
             this.$store.dispatch('getPosts');
+            this.$store.dispatch('getUserInfos');
         },
         computed: {
             ...mapState({
