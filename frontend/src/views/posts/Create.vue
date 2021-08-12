@@ -22,13 +22,15 @@
             </b-form-group>
 
             <b-form-group>
-                <div>{{ form.file ? 'Image sélectionnée' : 'Sélectionner une image' }} : {{ form.file ? form.file.name : '' }}</div>
+                <div class="mb-3">{{ form.file ? 'Image sélectionnée' : 'Sélectionner une image' }} : {{ form.file ? form.file.name : '' }}</div>
                 <b-form-file 
-                v-model="form.file" 
-                class="mt-3" 
+                v-model="form.file"
                 plain
+                ref="file-input"
+                accept="image/*"
                 @change="onFilePicked"
                 ></b-form-file>
+                <b-button @click="removeFile()" size="sm" variant="outline-danger">Enlever le fichier</b-button>
             </b-form-group>
         
             <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
@@ -71,16 +73,9 @@
         methods: {
             onFilePicked(event) {
                 this.form.file = event.target.files[0];
-                // const files = event.target.files;
-                // const fileReader = new FileReader();
-
-                // fileReader.addEventListener('load', () => {
-                //     this.imageUrl = fileReader.result;
-                // });
-
-                // fileReader.readAsDataURL(files[0]);
-                // this.form.image = URL.createObjectURL(files[0]);
-                // console.log(this.form.image)
+            },
+            removeFile() {
+                this.$refs['file-input'].reset();
             },
             onSubmit() {
                 const formData = new FormData();
@@ -103,4 +98,9 @@
     }
 </script>
 
-<style></style>
+<style>
+    .form-control-file {
+        margin-right: 7px !important;
+        margin-bottom: 7px !important;
+    }
+</style>

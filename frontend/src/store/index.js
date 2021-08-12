@@ -142,7 +142,7 @@ export default new Vuex.Store({
             });
         },
 
-        getPosts({ commit }) {
+        getAllPosts({ commit }) {
             return new Promise((resolve, reject) => {
                 instance.get('posts')
                     .then(function(response) {
@@ -165,6 +165,19 @@ export default new Vuex.Store({
                     .catch(function(error) {
                         reject(error);
                     });
+            });
+        },
+
+        getOnePost({ commit }, id) {
+            return new Promise((resolve, reject) => {
+                instance.get(`posts/${id}`)
+                    .then(function(response) {
+                        commit('POSTS_LIST', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
             });
         }
     }

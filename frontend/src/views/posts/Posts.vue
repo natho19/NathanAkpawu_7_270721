@@ -1,6 +1,6 @@
 <template>
     <div class="users-posts">
-        <user-post v-bind:post="post" v-for="post in posts" :key="post.id"></user-post>
+        <user-post v-for="post in posts" :key="post.id" v-bind:post="post"></user-post>
     </div>
 </template>
 
@@ -19,7 +19,7 @@
                 this.$router.push('/');
                 return;
             }
-            this.$store.dispatch('getPosts');
+            this.$store.dispatch('getAllPosts');
             this.$store.dispatch('getUserInfos');
         },
         computed: {

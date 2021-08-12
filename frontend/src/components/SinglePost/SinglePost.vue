@@ -3,7 +3,7 @@
         <div class="user">
             <div class="user-info">
                 <b-avatar></b-avatar>
-                <h2>Nathan Akpawu</h2>
+                <h2>{{ post.User.name }}</h2>
             </div>
             <div class="user-actions">
                 <b-button @click="modifyPost()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
@@ -11,14 +11,18 @@
             </div>
         </div>
         <div class="post">
-            <h3 class="post-title">Lorem ipsum dolor sit</h3>
-            <p class="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis blanditiis libero minima, sint est. Facere ea ducimus vitae omnis, harum nisi id soluta fugit tempore et. Sunt, voluptatibus quidem?</p>
-            <img src="../../assets/images/heart_eyes.gif" alt="Heart eyes" class="post-image">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <p v-if="post.content" class="post-content">{{ post.content }}</p>
+            <a v-if="post.imageUrl" @click="singlePost()">
+                <img :src="post.imageUrl" :alt="post.title" class="post-image">
+            </a>
         </div>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'SinglePost',
         methods: {
@@ -28,6 +32,11 @@
             deletePost() {
                 this.$router.push('/delete-post/1')
             }
+        },
+        computed: {
+            ...mapState({
+                post: 'posts'
+            })
         }
     }
 </script>
