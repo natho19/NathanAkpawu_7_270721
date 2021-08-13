@@ -12,17 +12,17 @@ import DeleteComment from './views/comments/Delete'
 
 export default [
     // User routes
-    { path: '/', component: Login },
-    { path: '/signup', component: Signup },
-    { path: '/modify-user', component: ModifyUser },
-    { path: '/delete-user', component: DeleteUser },
+    { path: '/', name:'login', component: Login },
+    { path: '/signup', name:'signup', component: Signup },
+    { path: '/modify-user', name:'modifyUser', component: ModifyUser },
+    { path: '/delete-user', name:'deleteUser', component: DeleteUser },
     // Post routes
-    { path: '/create-post', component: CreatePost },
-    { path: '/posts', component: AllPosts },
-    { path: '/post/:id', component: SinglePost },
-    { path: '/modify-post/:id', component: ModifyPost },
-    { path: '/delete-post/:id', component: DeletePost },
+    { path: '/create-post', name:'createPost', component: CreatePost },
+    { path: '/posts', name:'allPosts', component: AllPosts },
+    { path: '/post/:id', name:'singlePost', component: SinglePost },
+    { path: '/modify-post/:id', name:'modifyPost', component: ModifyPost },
+    { path: '/delete-post/:id', name:'deletePost', component: DeletePost },
     // Comment routes
-    { path: '/post/:postId/modify-comment/:id', component: ModifyComment },
-    { path: '/post/:postId/delete-comment/:id', component: DeleteComment },
+    { path: '/post/:postId/modify-comment/:id', name:'modifyComment', component: ModifyComment },
+    { path: '/post/:postId/delete-comment/:id', name:'deleteComment', component: DeleteComment },
 ]

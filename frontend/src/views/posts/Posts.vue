@@ -8,16 +8,18 @@
                 </div>
             </div>
             <div class="post">
-                <a :href="`/post/${post.id}`" class="post-link">
+                <router-link :to="{ name: 'singlePost', params: { id: post.id }}" class="post-link">
                     <h3 class="post-title">{{ post.title }}</h3>
-                </a>
+                </router-link>
                 <p v-if="post.content" class="post-content">{{ post.content }}</p>
-                <a v-if="post.imageUrl" :href="`/post/${post.id}`">
+                <router-link v-if="post.imageUrl" :to="{ name: 'singlePost', params: { id: post.id }}">
                     <img :src="post.imageUrl" :alt="post.title" class="post-image">
-                </a>
+                </router-link>
             </div>
             <div class="comment">
-                <a :href="`/post/${post.id}`" class="btn btn-primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</a>
+                <router-link :to="{ name: 'singlePost', params: { id: post.id }}">
+                    <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
+                </router-link>
                 <b-button variant="secondary"><b-icon-share-fill></b-icon-share-fill> Partager</b-button>
             </div>
         </div>
@@ -41,7 +43,7 @@
             ...mapState({
                 posts: 'posts'
             })
-        },
+        }
     }
 </script>
 
