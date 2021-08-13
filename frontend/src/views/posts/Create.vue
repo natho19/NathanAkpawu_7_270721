@@ -45,7 +45,6 @@
         name: 'Create',
         mounted: function() {
             if (this.$store.state.user.userId == -1) {
-                console.log(this.$store.state.user)
                 this.$router.push('/');
                 return;
             }
@@ -92,7 +91,6 @@
                     }, function(error) {
                         console.log(error);
                     });
-                console.log(...formData);
             }
         }
     }

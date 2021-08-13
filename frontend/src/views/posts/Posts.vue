@@ -1,21 +1,36 @@
 <template>
     <div class="users-posts">
-        <user-post v-for="post in posts" :key="post.id" v-bind:post="post"></user-post>
+        <div class="user-post" v-for="post in posts" :key="post.id">
+            <div class="user" v-if="post.User">
+                <div class="user-info">
+                    <b-avatar></b-avatar>
+                    <h2>{{ post.User.name }}</h2>
+                </div>
+            </div>
+            <div class="post">
+                <a :href="`/post/${post.id}`" class="post-link">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                </a>
+                <p v-if="post.content" class="post-content">{{ post.content }}</p>
+                <a v-if="post.imageUrl" :href="`/post/${post.id}`">
+                    <img :src="post.imageUrl" :alt="post.title" class="post-image">
+                </a>
+            </div>
+            <div class="comment">
+                <a :href="`/post/${post.id}`" class="btn btn-primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</a>
+                <b-button variant="secondary"><b-icon-share-fill></b-icon-share-fill> Partager</b-button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    import UserPost from '../../components/UserPost/UserPost.vue'
     import { mapState } from 'vuex'
 
     export default {
         name: 'Posts',
-        components: {
-            'user-post': UserPost,
-        },
         mounted: function() {
             if (this.$store.state.user.userId == -1) {
-                console.log(this.$store.state.user)
                 this.$router.push('/');
                 return;
             }
@@ -30,4 +45,105 @@
     }
 </script>
 
-<style></style>
+<style>
+    .user-post {
+        background: #FFF;
+        border: 1px solid #CED4DA;
+        padding: 25px !important;
+        margin-bottom: 25px;
+    }
+
+    .user-post:last-child {
+        margin-bottom: 0;
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-info .b-avatar {
+        color: #989CA1;
+        background-color: #DAE0E6;
+        margin-right: 8px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .user-info h2 {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+    .btn-circle:first-child {
+        margin-right: 10px;
+    }
+
+    .btn-circle:last-child {
+        margin-right: 0;
+    }
+
+    .btn-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50% !important;
+        line-height: 1 !important;
+        text-align: center;
+    }
+
+    .btn-circle .b-icon {
+        width: 16px;
+        vertical-align: baseline;
+        margin-left: -4.5px;
+    }
+
+    .post {
+        margin-bottom: 20px;
+    }
+
+    .post a {
+        cursor: pointer;
+    }
+
+    .post-link {
+        text-decoration: none;
+        color: #FD2D01;
+        transition: all .3s ease-in-out;
+    }
+
+    .post-link:hover {
+        text-decoration: underline;
+        color: #FD2D01;
+    }
+
+    .post-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #FD2D01;
+        margin-bottom: 15px;
+    }
+
+    .post-content {
+        font-size: 15px;
+        font-weight: 300;
+    }
+
+    .post-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
+
+    .comment {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
