@@ -71,7 +71,7 @@
         },
         computed: {
             ...mapState({
-                post: 'posts'
+                post: 'post'
             })
         },
         data() {

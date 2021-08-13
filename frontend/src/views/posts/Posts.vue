@@ -8,16 +8,16 @@
                 </div>
             </div>
             <div class="post">
-                <router-link :to="{ name: 'singlePost', params: { id: post.id }}" class="post-link">
+                <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}" class="post-link">
                     <h3 class="post-title">{{ post.title }}</h3>
                 </router-link>
                 <p v-if="post.content" class="post-content">{{ post.content }}</p>
-                <router-link v-if="post.imageUrl" :to="{ name: 'singlePost', params: { id: post.id }}">
+                <router-link v-if="post.id && post.imageUrl" :to="{ name: 'singlePost', params: { id: post.id }}">
                     <img :src="post.imageUrl" :alt="post.title" class="post-image">
                 </router-link>
             </div>
             <div class="comment">
-                <router-link :to="{ name: 'singlePost', params: { id: post.id }}">
+                <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}">
                     <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
                 </router-link>
                 <b-button variant="secondary"><b-icon-share-fill></b-icon-share-fill> Partager</b-button>
@@ -38,10 +38,11 @@
             }
             this.$store.dispatch('getAllPosts');
             this.$store.dispatch('getUserInfos');
+            console.log(this.posts);
         },
         computed: {
             ...mapState({
-                posts: 'posts'
+                posts: ['posts']
             })
         }
     }

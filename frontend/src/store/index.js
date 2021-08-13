@@ -31,7 +31,8 @@ export default new Vuex.Store({
         status: '',
         user: user,
         userInfos: {},
-        posts: []
+        posts: [],
+        post: {}
     },
 
     mutations: {
@@ -60,6 +61,10 @@ export default new Vuex.Store({
 
         POSTS_LIST: function(state, posts) {
             state.posts = posts;
+        },
+
+        SINGLE_POST: function(state, post) {
+            state.post = post;
         },
 
         CREATE_POST: function(state, newPost) {
@@ -172,7 +177,7 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 instance.get(`posts/${id}`)
                     .then(function(response) {
-                        commit('POSTS_LIST', response.data);
+                        commit('SINGLE_POST', response.data);
                         resolve(response);
                     })
                     .catch(function(error) {
