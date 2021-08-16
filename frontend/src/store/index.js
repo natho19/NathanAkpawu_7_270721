@@ -69,7 +69,8 @@ export default new Vuex.Store({
 
         CREATE_POST: function(state, newPost) {
             state.posts.unshift(newPost);
-        }
+        },
+
     },
 
     actions: {
@@ -178,6 +179,19 @@ export default new Vuex.Store({
                 instance.get(`posts/${id}`)
                     .then(function(response) {
                         commit('SINGLE_POST', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
+        },
+
+        deletePost({ state }) {
+            return new Promise((resolve, reject) => {
+                instance.delete(`posts/${state.post.id}`, { data: { userId: state.post.User.id } })
+                    .then(function(response) {
+                        console.log(response);
                         resolve(response);
                     })
                     .catch(function(error) {
