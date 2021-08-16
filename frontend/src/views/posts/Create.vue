@@ -82,7 +82,7 @@
                 formData.append('content', this.form.content);
                 formData.append('image', this.form.file);
                 formData.append('userId', this.userInfos.id);
-
+                
                 const self = this;
                 this.$store.dispatch('createPost', formData)
                     .then(function() {

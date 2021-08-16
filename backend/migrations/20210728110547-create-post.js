@@ -13,7 +13,7 @@ module.exports = {
             type: Sequelize.STRING
         },
         content: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(1000)
         },
         imageUrl: {
             type: Sequelize.STRING

@@ -62,7 +62,7 @@
                 this.$store.dispatch('editUserName', { 
                     name: this.name 
                 }).then(function() {
-                    window.location.reload()
+                    console.log('Utilisateur modifié avec succès !')
                 }, function(error) {
                     console.log(error);
                 });

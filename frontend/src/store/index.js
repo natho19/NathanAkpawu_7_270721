@@ -59,16 +59,16 @@ export default new Vuex.Store({
             state.userInfos.name = newName;
         },
 
-        CREATE_POST: function(state, newPost) {
-            state.posts.unshift(newPost);
-        },
-
         POSTS_LIST: function(state, posts) {
             state.posts = posts;
         },
 
         SINGLE_POST: function(state, post) {
             state.post = post;
+        },
+
+        CREATE_POST: function(state, newPost) {
+            state.posts.unshift(newPost);
         },
 
         SET_POST_TITLE: function(state, newTitle) {
