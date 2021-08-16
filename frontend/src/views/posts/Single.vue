@@ -15,9 +15,7 @@
             <div class="post">
                 <h3 class="post-title">{{ post.title }}</h3>
                 <p v-if="post.content" class="post-content">{{ post.content }}</p>
-                <a v-if="post.imageUrl" @click="singlePost()">
-                    <img :src="post.imageUrl" :alt="post.title" class="post-image">
-                </a>
+                <img v-if="post.imageUrl" :src="post.imageUrl" :alt="post.title" class="post-image">
             </div>
         </div>
         <!-- Comment Form -->

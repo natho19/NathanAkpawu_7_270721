@@ -22,7 +22,7 @@
             </b-form-group>
 
             <b-form-group>
-                <div class="mb-3">{{ form.file ? 'Image sélectionnée' : 'Sélectionner une image' }} : {{ form.file ? form.file.name : '' }}</div>
+                <div class="mb-3">{{ form.file ? 'Image sélectionnée' : 'Sélectionner une image' }} : <b-button v-if="form.file" class="btn-remove-file" @click="removeFile()" size="sm" variant="outline-danger">Enlever l'image</b-button></div>
                 <b-form-file 
                 v-model="form.file"
                 plain
@@ -30,7 +30,6 @@
                 accept="image/*"
                 @change="onFilePicked"
                 ></b-form-file>
-                <b-button @click="removeFile()" size="sm" variant="outline-danger">Enlever le fichier</b-button>
             </b-form-group>
         
             <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
@@ -97,8 +96,7 @@
 </script>
 
 <style>
-    .form-control-file {
-        margin-right: 7px !important;
-        margin-bottom: 7px !important;
+    .btn-remove-file {
+        margin: 5px;
     }
 </style>

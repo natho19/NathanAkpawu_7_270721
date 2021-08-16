@@ -54,9 +54,13 @@ export default new Vuex.Store({
         USER_INFOS: function(state, userInfos) {
             state.userInfos = userInfos;
         },
-        
+
         SET_USER_NAME: function(state, newName) {
             state.userInfos.name = newName;
+        },
+
+        CREATE_POST: function(state, newPost) {
+            state.posts.unshift(newPost);
         },
 
         POSTS_LIST: function(state, posts) {
@@ -65,10 +69,6 @@ export default new Vuex.Store({
 
         SINGLE_POST: function(state, post) {
             state.post = post;
-        },
-
-        CREATE_POST: function(state, newPost) {
-            state.posts.unshift(newPost);
         },
 
         SET_POST_TITLE: function(state, newTitle) {
@@ -155,11 +155,11 @@ export default new Vuex.Store({
             });
         },
 
-        getAllPosts({ commit }) {
+        createPost({ commit }, newPost) {
             return new Promise((resolve, reject) => {
-                instance.get('posts')
+                instance.post('posts', newPost, {'Content-Type': 'application/form-data'})
                     .then(function(response) {
-                        commit('POSTS_LIST', response.data);
+                        commit('CREATE_POST', response.data);
                         resolve(response);
                     })
                     .catch(function(error) {
@@ -168,11 +168,11 @@ export default new Vuex.Store({
             });
         },
 
-        createPost({ commit }, file) {
+        getAllPosts({ commit }) {
             return new Promise((resolve, reject) => {
-                instance.post('posts', file, {'Content-Type': 'application/form-data'})
+                instance.get('posts')
                     .then(function(response) {
-                        commit('CREATE_POST', response.data);
+                        commit('POSTS_LIST', response.data);
                         resolve(response);
                     })
                     .catch(function(error) {
@@ -191,6 +191,18 @@ export default new Vuex.Store({
                     .catch(function(error) {
                         reject(error);
                     })
+            });
+        },
+
+        modifyPost({ state }, modifiedPost) {
+            return new Promise((resolve, reject) => {
+                instance.put(`posts/${state.post.id}`, modifiedPost, {'Content-Type': 'application/form-data'})
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
             });
         },
 

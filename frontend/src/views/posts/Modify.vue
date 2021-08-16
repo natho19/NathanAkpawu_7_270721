@@ -26,10 +26,11 @@
             </div>
 
             <b-form-group>
-                <div class="mb-3">{{ file ? 'Image sélectionnée' : 'Remplacer l\'image par' }} : {{ file ? file.name : '' }}</div>
+                <div class="mb-3">{{ file ? 'Image sélectionnée' : 'Sélectionner une nouvelle image' }} : <b-button v-if="file" class="btn-remove-file" @click="removeFile()" size="sm" variant="outline-danger">Enlever l'image</b-button></div>
                 <b-form-file 
                 v-model="file"
                 plain
+                ref="file-input"
                 accept="image/*"
                 @change="onFilePicked"
                 ></b-form-file>
@@ -41,6 +42,8 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'Modify',
         mounted: function() {
@@ -49,7 +52,12 @@
                 return;
             }
             this.$store.dispatch('getOnePost', this.$route.params.id);
-            console.log(this.$store.state.post);
+            this.$store.dispatch('getUserInfos');
+        },
+        data() {
+            return {
+                file: null
+            }
         },
         computed: {
             requiredFields: function() {
@@ -59,6 +67,10 @@
                     return false
                 }
             },
+            ...mapState({
+                post: 'post',
+                userInfos: 'userInfos'
+            }),
             title: {
                 get() {
                     return this.$store.state.post.title;
@@ -82,17 +94,29 @@
             }
 
         },
-        data() {
-            return {
-                file: null
-            }
-        },
         methods: {
             onFilePicked(event) {
                 this.file = event.target.files[0];
             },
+            removeFile() {
+                this.$refs['file-input'].reset();
+            },
             onSubmit() {
-                console.log(this.file);
+                const formData = new FormData();
+                const postId = this.post.id;
+
+                formData.append('title', this.title);
+                formData.append('content', this.content);
+                formData.append('image', this.file);
+                formData.append('userId', this.userInfos.id);
+
+                const self = this;
+                this.$store.dispatch('modifyPost', formData)
+                    .then(function() {
+                        self.$router.push(`/post/${postId}`);
+                    }, function(error) {
+                        console.log(error);
+                    })
             }
         }
     }
