@@ -40,11 +40,16 @@ exports.modifyPost = (req, res) => {
     const id = req.params.id;
     const userId = req.body.userId
 
-    const updatedPost = {
+    let updatedPost = {
         title: req.body.title,
         content: req.body.content,
-        imageUrl: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null
     }
+
+    if (req.file) {
+        updatedPost["imageUrl"] = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    }
+
+    console.log(updatedPost);
 
     Post.update(updatedPost, { where: { id: id, userId: userId }})
         .then(() => res.status(200).json({ message: 'Post modifié avec succès' }))

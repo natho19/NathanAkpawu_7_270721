@@ -27,10 +27,11 @@
             <h1><b-icon-exclamation-triangle></b-icon-exclamation-triangle> Aucun post publié</h1>
             <p>Il semble qu'aucun post n'est encore publié pour le moment. Soyez le premier, publiez et partagez avec vos collègues.</p>
             <router-link :to="{ name: 'createPost' }">
-                <b-button variant="primary"><b-icon-plus-circle-fill></b-icon-plus-circle-fill>  Publier un post</b-button>
+                <b-button variant="primary"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier un post</b-button>
             </router-link>
         </div>
     </div>
+    
 </template>
 
 <script>
@@ -44,7 +45,6 @@
                 return;
             }
             this.$store.dispatch('getAllPosts');
-            console.log(this.posts);
         },
         computed: {
             ...mapState({

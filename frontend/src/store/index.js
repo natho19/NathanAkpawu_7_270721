@@ -71,6 +71,13 @@ export default new Vuex.Store({
             state.posts.unshift(newPost);
         },
 
+        SET_POST_TITLE: function(state, newTitle) {
+            state.post.title = newTitle;
+        },
+
+        SET_POST_CONTENT: function(state, newContent) {
+            state.post.content = newContent;
+        }
     },
 
     actions: {
@@ -191,7 +198,6 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 instance.delete(`posts/${state.post.id}`, { data: { userId: state.post.User.id } })
                     .then(function(response) {
-                        console.log(response);
                         resolve(response);
                     })
                     .catch(function(error) {

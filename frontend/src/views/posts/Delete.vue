@@ -15,7 +15,6 @@
                 return;
             }
             this.$store.dispatch('getOnePost', this.$route.params.id);
-            console.log(this.$store.state.post);
         },
         methods: {
             deletePost: function() {

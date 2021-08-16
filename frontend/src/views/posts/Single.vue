@@ -93,7 +93,8 @@
                 console.log(this.form)
             },
             modifyPost() {
-                console.log('Modifier un post');
+                
+                this.$router.push(`/modify-post/${this.post.id}`);
             },
             deletePost() {
                 this.$router.push(`/delete-post/${this.post.id}`);
