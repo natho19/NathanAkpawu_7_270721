@@ -159,7 +159,7 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 instance.post('posts', newPost, {'Content-Type': 'application/form-data'})
                     .then(function(response) {
-                        commit('CREATE_POST', response.data);
+                        commit('CREATE_POST', newPost);
                         resolve(response);
                     })
                     .catch(function(error) {

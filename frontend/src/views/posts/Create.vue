@@ -82,6 +82,8 @@
                 formData.append('content', this.form.content);
                 formData.append('image', this.form.file);
                 formData.append('userId', this.userInfos.id);
+
+                console.log(...formData);
                 
                 const self = this;
                 this.$store.dispatch('createPost', formData)
