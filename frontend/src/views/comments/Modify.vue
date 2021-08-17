@@ -43,8 +43,8 @@
                 }
             },
             ...mapState({
-                userInfos: 'userInfos',
-                comment: 'comment'
+                comment: 'comment',
+                userInfos: 'userInfos'
             }),
             content: {
                 get() {

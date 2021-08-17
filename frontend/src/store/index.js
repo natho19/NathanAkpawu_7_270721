@@ -285,6 +285,18 @@ export default new Vuex.Store({
                         reject(error);
                     })
             });
-        }
+        },
+
+        deleteComment({ state }, { postId, id }) {
+            return new Promise((resolve, reject) => {
+                instance.delete(`posts/${postId}/comments/${id}`, { data: { userId: state.userInfos.id } })
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
+        },
     }
 })
