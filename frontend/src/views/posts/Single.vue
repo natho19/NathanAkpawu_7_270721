@@ -92,34 +92,35 @@
 
     export default {
         name: 'Single',
+
         mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
             this.$store.dispatch('getOnePost', this.$route.params.id);
             this.$store.dispatch('getAllComments', this.$route.params.id);
             this.$store.dispatch('getUserInfos');
         },
+
         computed: {
             ...mapState({
                 post: 'post',
                 comments: 'comments',
                 userInfos: 'userInfos'
             }),
+
             requiredFields: function() {
                 if (this.content != '' ) {
                     return true
                 } else {
                     return false
                 }
-            },
+            }
         },
+
         data() {
             return {
                 content: ''
             }
         },
+        
         methods: {
             onSubmit() {
                 this.$store.dispatch('createComment', {

@@ -51,19 +51,25 @@
 
     export default {
         name: 'Header',
+
         mounted: function() {
             if (this.$store.state.user.userId != -1) {
                 this.$store.commit('SET_STATUS', 'login')
             }
         },
+
         computed: {
-            ...mapState(['status'])
+            ...mapState({
+                status: 'status'
+            })
         },
+
         methods: {
             logout: function() {
                 this.$store.dispatch('logout');
                 this.$router.push('/');
             },
+
             createPost: function() {
                 this.$router.push('/create-post');
             }

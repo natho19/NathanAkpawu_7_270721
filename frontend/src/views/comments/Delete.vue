@@ -11,12 +11,8 @@
 
     export default {
         name: 'Delete',
-        mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
 
+        mounted: function() {
             this.$store.dispatch('getOneComment', {
                 postId: this.$route.params.postId,
                 id: this.$route.params.id
@@ -24,16 +20,17 @@
 
             this.$store.dispatch('getUserInfos');
         },
+
         computed: {
             ...mapState({
                 comment: 'comment',
                 userInfos: 'userInfos'
             }),
         },
+
         methods: {
             deleteComment() {
                 const self = this;
-
                 this.$store.dispatch('deleteComment', {
                     postId: this.comment.postId,
                     id: this.comment.id,

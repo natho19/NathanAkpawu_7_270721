@@ -38,12 +38,14 @@
 
     export default {
         name: 'Login',
+
         mounted: function() {
             if (this.$store.state.user.userId != -1) {
                 this.$router.push('/posts');
                 return;
             }
         },
+
         data() {
             return {
                 form: {
@@ -52,20 +54,24 @@
                 }
             }
         },
+
         computed: {
+            ...mapState({
+                status: 'status'
+            }),
+
             requiredFields: function() {
                 if (this.form.email != '' && this.form.password != '' ) {
                     return true
                 } else {
                     return false
                 }
-            },
-            ...mapState(['status'])
+            }
         },
+
         methods: {
             onSubmit() {
                 const self = this;
-    
                 this.$store.dispatch('login', {
                     email: this.form.email,
                     password: this.form.password

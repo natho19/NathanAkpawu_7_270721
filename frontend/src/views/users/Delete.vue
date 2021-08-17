@@ -11,16 +11,12 @@
         name: 'Delete',
         
         mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
             this.$store.dispatch('getUserInfos');
         },
+
         methods: {
             deleteUser() {
                 const self = this;
-
                 this.$store.dispatch('deleteUser')
                     .then(function() {
                         self.$store.dispatch('logout');

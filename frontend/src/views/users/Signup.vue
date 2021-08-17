@@ -47,6 +47,7 @@
 
     export default {
         name: 'Signup',
+
         data() {
             return {
                 form: {
@@ -56,20 +57,24 @@
                 }
             }
         },
+
         computed: {
+            ...mapState({
+                status: 'status'
+            }),
+
             requiredFields: function() {
                 if (this.form.name != '' && this.form.email != '' && this.form.password != '' ) {
                     return true
                 } else {
                     return false
                 }
-            },
-            ...mapState(['status'])
+            }
         },
+        
         methods: {
             onSubmit() {
                 const self = this;
-
                 this.$store.dispatch('createAccount', {
                     name: this.form.name,
                     email: this.form.email,

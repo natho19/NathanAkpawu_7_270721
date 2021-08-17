@@ -46,31 +46,24 @@
 
     export default {
         name: 'Modify',
+
         mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
             this.$store.dispatch('getOnePost', this.$route.params.id);
             this.$store.dispatch('getUserInfos');
         },
+
         data() {
             return {
                 file: null
             }
         },
+
         computed: {
-            requiredFields: function() {
-                if (this.title != '') {
-                    return true
-                } else {
-                    return false
-                }
-            },
             ...mapState({
                 post: 'post',
                 userInfos: 'userInfos'
             }),
+
             title: {
                 get() {
                     return this.$store.state.post.title;
@@ -79,6 +72,7 @@
                     this.$store.commit('SET_POST_TITLE', newTitle)
                 }
             },
+
             content: {
                 get() {
                     return this.$store.state.post.content;
@@ -87,12 +81,20 @@
                     this.$store.commit('SET_POST_CONTENT', newContent)
                 }
             },
+
             image: {
                 get() {
                     return this.$store.state.post.imageUrl;
                 }
-            }
+            },
 
+            requiredFields: function() {
+                if (this.title != '') {
+                    return true
+                } else {
+                    return false
+                }
+            }
         },
         methods: {
             onFilePicked(event) {

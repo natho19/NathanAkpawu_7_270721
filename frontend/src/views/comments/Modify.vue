@@ -23,29 +23,22 @@
 
     export default {
         name: 'Modify',
+
         mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
             this.$store.dispatch('getOneComment', {
                 postId: this.$route.params.postId,
                 id: this.$route.params.id
             });
+            
             this.$store.dispatch('getUserInfos');
         },
+
         computed: {
-            requiredFields: function() {
-                if (this.content != '') {
-                    return true
-                } else {
-                    return false
-                }
-            },
             ...mapState({
                 comment: 'comment',
                 userInfos: 'userInfos'
             }),
+
             content: {
                 get() {
                     return this.$store.state.comment.content;
@@ -53,12 +46,20 @@
                 set(newContent) {
                     this.$store.commit('SET_COMMENT', newContent)
                 }
+            },
+
+            requiredFields: function() {
+                if (this.content != '') {
+                    return true
+                } else {
+                    return false
+                }
             }
         },
+
         methods: {
             onSubmit() {
                 const self = this;
-
                 this.$store.dispatch('editComment', {
                     content: this.content,
                     userId: this.userInfos.id

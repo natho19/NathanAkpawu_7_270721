@@ -42,13 +42,11 @@
 
     export default {
         name: 'Create',
+
         mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
             this.$store.dispatch('getUserInfos');
         },
+
         data() {
             return {
                 form: {
@@ -58,32 +56,36 @@
                 }
             }
         },
+
         computed: {
+            ...mapState({
+                userInfos: 'userInfos'
+            }),
+
             requiredFields: function() {
                 if (this.form.title != '') {
                     return true
                 } else {
                     return false
                 }
-            },
-            ...mapState(['userInfos'])
+            }
         },
+
         methods: {
             onFilePicked(event) {
                 this.form.file = event.target.files[0];
             },
+
             removeFile() {
                 this.$refs['file-input'].reset();
             },
+
             onSubmit() {
                 const formData = new FormData();
-                
                 formData.append('title', this.form.title);
                 formData.append('content', this.form.content);
                 formData.append('image', this.form.file);
                 formData.append('userId', this.userInfos.id);
-
-                console.log(...formData);
                 
                 const self = this;
                 this.$store.dispatch('createPost', formData)

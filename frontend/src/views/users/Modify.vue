@@ -29,20 +29,10 @@
 <script>
     export default {
         mounted: function() {
-            if (this.$store.state.user.userId == -1) {
-                this.$router.push('/');
-                return;
-            }
             this.$store.dispatch('getUserInfos');
         },
+
         computed: {
-            requiredFields: function() {
-                if (this.name != '') {
-                    return true
-                } else {
-                    return false
-                }
-            },
             name: {
                 get() {
                     return this.$store.state.userInfos.name;
@@ -51,12 +41,22 @@
                     this.$store.commit('SET_USER_NAME', newName)
                 }
             },
+
             email: {
                 get() {
                     return this.$store.state.userInfos.email;
                 }
+            },
+            
+            requiredFields: function() {
+                if (this.name != '') {
+                    return true
+                } else {
+                    return false
+                }
             }
         },
+
         methods: {
             onSubmit() {
                 this.$store.dispatch('editUserName', { 
