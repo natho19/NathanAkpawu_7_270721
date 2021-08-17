@@ -8,11 +8,20 @@
                 </div>
             </div>
             <div class="post">
-                <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}" class="post-link">
+                <router-link 
+                v-if="post.id" 
+                :to="{ name: 'singlePost', 
+                params: { id: post.id }}" 
+                class="post-link"
+                >
                     <h3 class="post-title">{{ post.title }}</h3>
                 </router-link>
                 <p v-if="post.content" class="post-content">{{ post.content }}</p>
-                <router-link v-if="post.id && post.imageUrl" :to="{ name: 'singlePost', params: { id: post.id }}">
+                <router-link 
+                v-if="post.id && post.imageUrl"
+                :to="{ name: 'singlePost',
+                params: { id: post.id }}"
+                >
                     <img :src="post.imageUrl" :alt="post.title" class="post-image">
                 </router-link>
             </div>
@@ -85,20 +94,13 @@
         margin-bottom: 0;
     }
 
-    .btn-circle:first-child {
-        margin-right: 10px;
-    }
-
-    .btn-circle:last-child {
-        margin-right: 0;
-    }
-
     .btn-circle {
         width: 32px;
         height: 32px;
         border-radius: 50% !important;
         line-height: 1 !important;
         text-align: center;
+        margin-left: 10px;
     }
 
     .btn-circle .b-icon {

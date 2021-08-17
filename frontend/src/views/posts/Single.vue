@@ -2,14 +2,26 @@
     <div class="single" v-if="post">
         <!-- Single Post -->
         <div class="single-post">
-            <div class="user" v-if="post.User">
-                <div class="user-info">
+            <div class="user">
+                <div class="user-info" v-if="post.User">
                     <b-avatar></b-avatar>
                     <h2>{{ post.User.name }}</h2>
                 </div>
                 <div class="user-actions">
-                    <b-button @click="modifyPost()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
-                    <b-button @click="deletePost()" variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                    <router-link 
+                        v-if="post.id" 
+                        :to="{ name: 'modifyPost',
+                        params: { id: post.id }}"
+                    >
+                        <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
+                    </router-link>
+                    <router-link 
+                        v-if="post.id" 
+                        :to="{ name: 'deletePost',
+                        params: { id: post.id }}"
+                    >
+                        <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                    </router-link>
                 </div>
             </div>
             <div class="post">
@@ -23,7 +35,7 @@
             <b-form class="form" @submit.prevent="onSubmit">
                 <b-form-group>
                     <b-form-textarea
-                    v-model="form.comment"
+                    v-model="comment"
                     placeholder="Commentaire"
                     rows="4"
                     max-rows="6"
@@ -34,21 +46,34 @@
             </b-form>
         </div>
         <!-- Comments -->
-        <div class="card-groupomania">
+        <div class="card-groupomania" v-if="comments.length !== 0">
             <!-- Comment -->
-            <div class="card-groupomania bg-gray">
+            <div class="comment-card" v-for="comment in comments" :key="comment.id">
                 <div class="user">
-                    <div class="user-info">
+                    <div class="user-info" v-if="comment.User">
                         <b-avatar></b-avatar>
-                        <h2>Nathan Akpawu</h2>
+                        <h2>{{ comment.User.name }}</h2>
                     </div>
                     <div class="user-actions">
-                        <b-button @click="modifyComment()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
-                        <b-button @click="deleteComment()" variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                        <router-link 
+                        v-if="comment.postId && comment.id" 
+                        :to="{ name: 'modifyComment',
+                        params: { postId: comment.postId, id: comment.id }}"
+                        >
+                            <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
+                        </router-link>
+
+                        <router-link 
+                        v-if="comment.postId && comment.id" 
+                        :to="{ name: 'deleteComment',
+                        params: { postId: comment.postId, id: comment.id }}"
+                        >
+                            <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                        </router-link>
                     </div>
                 </div>
                 <div class="comment">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illum distinctio similique consequuntur voluptatem magnam dicta ullam asperiores eaque accusantium?</p>
+                    <p>{{ comment.content }}</p>
                 </div>
             </div>
         </div>
@@ -73,35 +98,22 @@
                 return;
             }
             this.$store.dispatch('getOnePost', this.$route.params.id);
+            this.$store.dispatch('getAllComments', this.$route.params.id);
         },
         computed: {
             ...mapState({
-                post: 'post'
+                post: 'post',
+                comments: 'comments'
             })
         },
         data() {
             return {
-                form: {
-                    comment: ''
-                }
+                comment: ''
             }
         },
         methods: {
             onSubmit() {
-                console.log(this.form)
-            },
-            modifyPost() {
-                
-                this.$router.push(`/modify-post/${this.post.id}`);
-            },
-            deletePost() {
-                this.$router.push(`/delete-post/${this.post.id}`);
-            },
-            modifyComment() {
-                this.$router.push('/post/1/modify-comment/1');
-            },
-            deleteComment() {
-                this.$router.push('/post/1/delete-comment/1');
+                console.log(this.comment);
             }
         }
     }
@@ -119,25 +131,29 @@
         margin-bottom: 0;
     }
 
-    .card-groupomania {
+    .comment-card {
+        background: #FFF;
+        border: 1px solid #CED4DA;
+        background: #F2F2F2;
+        padding: 15px;
         margin-bottom: 15px;
-        padding: 20px !important;
     }
 
-    .card-groupomania:last-child {
+    .comment-card:last-child {
         margin-bottom: 0;
     }
 
-    .bg-gray {
-        background: #F2F2F2;
+    .comment-card .user {
+        margin-bottom: 10px;
     }
 
     .user {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
     .comment p {
         font-size: 14.5px;
         font-weight: 300;
+        margin-bottom: 5px;
     }
 </style>

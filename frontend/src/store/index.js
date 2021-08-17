@@ -32,7 +32,8 @@ export default new Vuex.Store({
         user: user,
         userInfos: {},
         posts: [],
-        post: {}
+        post: {},
+        comments: []
     },
 
     mutations: {
@@ -77,6 +78,10 @@ export default new Vuex.Store({
 
         SET_POST_CONTENT: function(state, newContent) {
             state.post.content = newContent;
+        },
+
+        COMMENTS_LIST: function(state, comments) {
+            state.comments = comments;
         }
     },
 
@@ -216,6 +221,19 @@ export default new Vuex.Store({
                         reject(error);
                     })
             });
-        }
+        },
+
+        getAllComments({ commit }, id) {
+            return new Promise((resolve, reject) => {
+                instance.get(`posts/${id}/comments`)
+                    .then(function(response) {
+                        commit('COMMENTS_LIST', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
+        },
     }
 })
