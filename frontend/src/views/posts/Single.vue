@@ -35,14 +35,14 @@
             <b-form class="form" @submit.prevent="onSubmit">
                 <b-form-group>
                     <b-form-textarea
-                    v-model="comment"
+                    v-model="content"
                     placeholder="Commentaire"
                     rows="4"
                     max-rows="6"
                     required
                     ></b-form-textarea>
                 </b-form-group>
-                <b-button type="submit" variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Envoyer</b-button>
+                <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Envoyer</b-button>
             </b-form>
         </div>
         <!-- Comments -->
@@ -99,21 +99,40 @@
             }
             this.$store.dispatch('getOnePost', this.$route.params.id);
             this.$store.dispatch('getAllComments', this.$route.params.id);
+            this.$store.dispatch('getUserInfos');
         },
         computed: {
             ...mapState({
                 post: 'post',
-                comments: 'comments'
-            })
+                comments: 'comments',
+                userInfos: 'userInfos'
+            }),
+            requiredFields: function() {
+                if (this.content != '' ) {
+                    return true
+                } else {
+                    return false
+                }
+            },
         },
         data() {
             return {
-                comment: ''
+                content: ''
             }
         },
         methods: {
             onSubmit() {
-                console.log(this.comment);
+                this.$store.dispatch('createComment', {
+                    id: this.$route.params.id,
+                    newComment: {
+                        content: this.content,
+                        userId: this.userInfos.id
+                    }
+                }).then(function() {
+                    window.location.reload();
+                }, function(error) {
+                    console.log(error);
+                })
             }
         }
     }

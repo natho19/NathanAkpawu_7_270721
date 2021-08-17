@@ -57,8 +57,8 @@ export default new Vuex.Store({
             state.userInfos = userInfos;
         },
 
-        SET_USER_NAME: function(state, newName) {
-            state.userInfos.name = newName;
+        SET_USER_NAME: function(state, modifiedName) {
+            state.userInfos.name = modifiedName;
         },
 
         POSTS_LIST: function(state, posts) {
@@ -73,12 +73,12 @@ export default new Vuex.Store({
             state.posts.unshift(newPost);
         },
 
-        SET_POST_TITLE: function(state, newTitle) {
-            state.post.title = newTitle;
+        SET_POST_TITLE: function(state, modifiedTitle) {
+            state.post.title = modifiedTitle;
         },
 
-        SET_POST_CONTENT: function(state, newContent) {
-            state.post.content = newContent;
+        SET_POST_CONTENT: function(state, modifiedPostContent) {
+            state.post.content = modifiedPostContent;
         },
 
         COMMENTS_LIST: function(state, comments) {
@@ -89,8 +89,12 @@ export default new Vuex.Store({
             state.comment = comment;
         },
 
-        SET_COMMENT: function(state, newComment) {
-            state.comment.content = newComment;
+        CREATE_COMMENT: function(state, newComment) {
+            state.comment = newComment
+        },
+
+        SET_COMMENT: function(state, modifiedCommentContent) {
+            state.comment.content = modifiedCommentContent;
         }
     },
 
@@ -258,10 +262,11 @@ export default new Vuex.Store({
             });
         },
 
-        editComment({ state }, newComment) {
+        createComment({ commit }, { id, newComment }) {
             return new Promise((resolve, reject) => {
-                instance.put(`posts/${state.comment.postId}/comments/${state.comment.id}}`, newComment)
+                instance.post(`posts/${id}/comments`, newComment)
                     .then(function(response) {
+                        commit('CREATE_COMMENT', newComment);
                         resolve(response);
                     })
                     .catch(function(error) {
@@ -269,5 +274,17 @@ export default new Vuex.Store({
                     })
             });
         },
+
+        editComment({ state }, modifiedComment) {
+            return new Promise((resolve, reject) => {
+                instance.put(`posts/${state.comment.postId}/comments/${state.comment.id}}`, modifiedComment)
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
+        }
     }
 })
