@@ -33,7 +33,8 @@ export default new Vuex.Store({
         userInfos: {},
         posts: [],
         post: {},
-        comments: []
+        comments: [],
+        comment: {}
     },
 
     mutations: {
@@ -82,6 +83,14 @@ export default new Vuex.Store({
 
         COMMENTS_LIST: function(state, comments) {
             state.comments = comments;
+        },
+
+        SINGLE_COMMENT: function(state, comment) {
+            state.comment = comment;
+        },
+
+        SET_COMMENT: function(state, newComment) {
+            state.comment.content = newComment;
         }
     },
 
@@ -233,6 +242,31 @@ export default new Vuex.Store({
                     .catch(function(error) {
                         reject(error);
                     });
+            });
+        },
+
+        getOneComment({ commit }, { postId, id }) {
+            return new Promise((resolve, reject) => {
+                instance.get(`posts/${postId}/comments/${id}`)
+                    .then(function(response) {
+                        commit('SINGLE_COMMENT', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
+        },
+
+        editComment({ state }, newComment) {
+            return new Promise((resolve, reject) => {
+                instance.put(`posts/${state.comment.postId}/comments/${state.comment.id}}`, newComment)
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
             });
         },
     }

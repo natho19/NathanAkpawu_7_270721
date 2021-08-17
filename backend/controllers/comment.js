@@ -42,9 +42,12 @@ exports.getOneComment = (req, res) => {
 // Modifier un commentaire
 exports.modifyComment = (req, res) => {
     const id = req.params.id;
-    const updatedComment = { content: req.body.content };
     const postId = req.params.postId;
     const userId = req.body.userId;
+
+    const updatedComment = { 
+        content: req.body.content,
+    };
 
     Comment.update(updatedComment, { where: { id: id, postId: postId, userId: userId } })
         .then(() => res.status(200).json({ message: 'Commentaire modifié avec succès' }))

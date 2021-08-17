@@ -5,7 +5,7 @@
         <b-form @submit.prevent="onSubmit" class="form">
             <b-form-group>
                 <b-form-textarea
-                v-model="form.comment"
+                v-model="content"
                 placeholder="Commentaire"
                 rows="4"
                 max-rows="6"
@@ -13,21 +13,63 @@
                 ></b-form-textarea>
             </b-form-group>
         
-            <b-button type="submit" variant="success"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
+            <b-button type="submit" variant="success" :class="{ 'disabled' : !requiredFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'Modify',
-        data() {
-            return {
-                form: {
-                    comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illum distinctio similique consequuntur voluptatem magnam dicta ullam asperiores eaque accusantium?'
+        mounted: function() {
+            if (this.$store.state.user.userId == -1) {
+                this.$router.push('/');
+                return;
+            }
+            this.$store.dispatch('getOneComment', {
+                postId: this.$route.params.postId,
+                id: this.$route.params.id
+            });
+            this.$store.dispatch('getUserInfos');
+        },
+        computed: {
+            requiredFields: function() {
+                if (this.content != '') {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            ...mapState({
+                userInfos: 'userInfos',
+                comment: 'comment'
+            }),
+            content: {
+                get() {
+                    return this.$store.state.comment.content;
+                },
+                set(newContent) {
+                    this.$store.commit('SET_COMMENT', newContent)
                 }
             }
-        }
+        },
+        methods: {
+            onSubmit() {
+                const self = this;
+
+                this.$store.dispatch('editComment', {
+                    content: this.content,
+                    userId: this.userInfos.id
+                })
+                .then(function() {
+                    self.$router.push(`/post/${self.comment.postId}`);
+                }, function(error) {
+                    console.log(error);
+                });
+            }
+        } 
     }
 </script>
 
