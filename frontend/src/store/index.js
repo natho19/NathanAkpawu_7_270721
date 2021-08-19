@@ -251,15 +251,27 @@ export default new Vuex.Store({
         },
 
         deletePost({ state }) {
-            return new Promise((resolve, reject) => {
-                instance.delete(`posts/${state.post.id}`, { data: { userId: state.post.User.id } })
-                    .then(function(response) {
-                        resolve(response);
-                    })
-                    .catch(function(error) {
-                        reject(error);
-                    })
-            });
+            if (state.userInfos.isAdmin) {
+                return new Promise((resolve, reject) => {
+                    instance.delete(`posts/admin/${state.post.id}`)
+                        .then(function(response) {
+                            resolve(response);
+                        })
+                        .catch(function(error) {
+                            reject(error);
+                        })
+                });
+            } else {
+                return new Promise((resolve, reject) => {
+                    instance.delete(`posts/${state.post.id}`, { data: { userId: state.post.User.id } })
+                        .then(function(response) {
+                            resolve(response);
+                        })
+                        .catch(function(error) {
+                            reject(error);
+                        })
+                });
+            }
         },
 
         getAllComments({ commit }, id) {
@@ -314,15 +326,27 @@ export default new Vuex.Store({
         },
 
         deleteComment({ state }, { postId, id }) {
-            return new Promise((resolve, reject) => {
-                instance.delete(`posts/${postId}/comments/${id}`, { data: { userId: state.userInfos.id } })
-                    .then(function(response) {
-                        resolve(response);
-                    })
-                    .catch(function(error) {
-                        reject(error);
-                    })
-            });
+            if (state.userInfos.isAdmin) {
+                return new Promise((resolve, reject) => {
+                    instance.delete(`posts/admin/${postId}/comments/${id}`)
+                        .then(function(response) {
+                            resolve(response);
+                        })
+                        .catch(function(error) {
+                            reject(error);
+                        })
+                });
+            } else {
+                return new Promise((resolve, reject) => {
+                    instance.delete(`posts/${postId}/comments/${id}`, { data: { userId: state.userInfos.id } })
+                        .then(function(response) {
+                            resolve(response);
+                        })
+                        .catch(function(error) {
+                            reject(error);
+                        })
+                });
+            }
         },
     }
 })

@@ -64,3 +64,13 @@ exports.deleteComment = (req, res) => {
         .then(() => res.status(200).json({ message: 'Commentaire supprimé avec succès' }))
         .catch(error => res.status(400).json({ message: 'Impossible de supprimer ce commentaire', error }))
 }
+
+// Supprimer un commentaire comme admin
+exports.deleteCommentAsAdmin = (req, res) => {
+    const id = req.params.id;
+    const postId = req.params.postId;
+
+    Comment.destroy({ where: { id: id, postId: postId } })
+        .then(() => res.status(200).json({ message: 'Commentaire supprimé avec succès' }))
+        .catch(error => res.status(400).json({ message: 'Impossible de supprimer ce commentaire', error }))
+}

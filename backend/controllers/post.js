@@ -80,3 +80,25 @@ exports.deletePost = (req, res) => {
         })
         .catch(error => res.status(500).json({ error }))
 }
+
+// Supprimer un post comme admin
+exports.deletePostAsAdmin = (req, res) => {
+    const id = req.params.id;
+
+    Post.findOne({ where: { id: id } })
+        .then(post => {
+            if (post.imageUrl) {
+                const filename = post.imageUrl.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
+                    Post.destroy({ where: { id: id }})
+                        .then(() => res.status(200).json({ message: 'Post supprimé avec succès' }))
+                        .catch(error => res.status(400).json({ message: 'Impossible de supprimer ce post', error }));
+                })
+            } else {
+                Post.destroy({ where: { id: id }})
+                    .then(() => res.status(200).json({ message: 'Post supprimé avec succès' }))
+                    .catch(error => res.status(400).json({ message: 'Impossible de supprimer ce post', error }));
+            }
+        })
+        .catch(error => res.status(500).json({ error }))
+}

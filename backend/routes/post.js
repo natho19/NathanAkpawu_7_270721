@@ -13,6 +13,7 @@ router.get('/', auth, postController.getAllPosts);
 router.get('/:id', auth, postController.getOnePost);
 router.put('/:id', auth, multer, postController.modifyPost);
 router.delete('/:id', auth, postController.deletePost);
+router.delete('/admin/:id', auth, postController.deletePostAsAdmin);
 
 // Routes pour les commentaires
 router.post('/:postId/comments', auth, commentController.createComment);
@@ -20,5 +21,6 @@ router.get('/:postId/comments', auth, commentController.getAllComments);
 router.get('/:postId/comments/:id', auth, commentController.getOneComment);
 router.put('/:postId/comments/:id', auth, commentController.modifyComment);
 router.delete('/:postId/comments/:id', auth, commentController.deleteComment);
+router.delete('/admin/:postId/comments/:id', auth, commentController.deleteCommentAsAdmin);
 
 module.exports = router;
