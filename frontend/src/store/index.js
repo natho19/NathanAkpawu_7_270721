@@ -38,6 +38,10 @@ export default new Vuex.Store({
     },
 
     getters: {
+        userName: state => {
+            return state.userInfos.name;
+        },
+
         hasPostRole: state => {
             if (state.userInfos.id === state.post.userId) {
                 return true;
