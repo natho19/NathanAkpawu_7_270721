@@ -7,16 +7,16 @@
                     <b-avatar></b-avatar>
                     <h2>{{ post.User.name }}</h2>
                 </div>
-                <div class="user-actions">
+                <div v-if="hasPostRole || isAdmin" class="user-actions">
                     <router-link 
-                        v-if="post.id" 
+                        v-if="hasPostRole"
                         :to="{ name: 'modifyPost',
                         params: { id: post.id }}"
                     >
                         <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
                     </router-link>
                     <router-link 
-                        v-if="post.id" 
+                        v-if="hasPostRole || isAdmin" 
                         :to="{ name: 'deletePost',
                         params: { id: post.id }}"
                     >
@@ -48,23 +48,23 @@
         <!-- Comments -->
         <div class="card-groupomania" v-if="comments.length !== 0">
             <!-- Comment -->
-            <div class="comment-card" v-for="comment in comments" :key="comment.id">
+            <div class="comment-card" v-for="(comment, index) in comments" :key="comment.id">
                 <div class="user">
                     <div class="user-info" v-if="comment.User">
                         <b-avatar></b-avatar>
                         <h2>{{ comment.User.name }}</h2>
                     </div>
-                    <div class="user-actions">
+                    <div class="user-actions" v-if="hasCommentRole(index) || isAdmin">
                         <router-link 
-                        v-if="comment.postId && comment.id" 
+                        v-if="hasCommentRole(index)" 
                         :to="{ name: 'modifyComment',
                         params: { postId: comment.postId, id: comment.id }}"
                         >
                             <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
                         </router-link>
 
-                        <router-link 
-                        v-if="comment.postId && comment.id" 
+                        <router-link
+                        v-if="hasCommentRole(index) || isAdmin"
                         :to="{ name: 'deleteComment',
                         params: { postId: comment.postId, id: comment.id }}"
                         >
@@ -89,6 +89,7 @@
 
 <script>
     import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'Single',
@@ -106,18 +107,24 @@
                 userInfos: 'userInfos'
             }),
 
+            ...mapGetters({
+                hasPostRole: 'hasPostRole',
+                hasCommentRole: 'hasCommentRole',
+                isAdmin: 'isAdmin'
+            }),
+
             requiredFields: function() {
                 if (this.content != '' ) {
-                    return true
+                    return true;
                 } else {
-                    return false
+                    return false;
                 }
-            }
+            },
         },
 
         data() {
             return {
-                content: ''
+                content: '',
             }
         },
         

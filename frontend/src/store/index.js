@@ -37,6 +37,32 @@ export default new Vuex.Store({
         comment: {}
     },
 
+    getters: {
+        hasPostRole: state => {
+            if (state.userInfos.id === state.post.userId) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        hasCommentRole: (state) => (index) => {
+            if (state.userInfos.id === state.comments[index].userId) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        isAdmin: state => {
+            if (state.userInfos.isAdmin) {
+                return true;
+            } else {
+                return false
+            }
+        }
+    },
+
     mutations: {
         SET_STATUS: function(state, status) {
             state.status = status;
