@@ -9,6 +9,9 @@ import ModifyPost from './views/posts/Modify'
 import DeletePost from './views/posts/Delete'
 import ModifyComment from './views/comments/Modify'
 import DeleteComment from './views/comments/Delete'
+import AllUsers from './views/admin/Users'
+import AdminModifyUser from './views/admin/Modify'
+import AdminDeleteUser from './views/admin/Delete'
 import NotFound from './views/404'
 
 export default [
@@ -26,6 +29,10 @@ export default [
     // Comment routes
     { path: '/post/:postId/modify-comment/:id', name: 'modifyComment', component: ModifyComment },
     { path: '/post/:postId/delete-comment/:id', name: 'deleteComment', component: DeleteComment },
+    // Admin routes
+    { path: '/admin/users', name: 'allUsers', component: AllUsers },
+    { path: '/admin/modify-user/:id', name: 'adminModifyUser', component: AdminModifyUser },
+    { path: '/admin/delete-user/:id', name: 'adminDeleteUser', component: AdminDeleteUser },
     // 404
     { path: '*', name: 'notFound', component: NotFound }
 ]

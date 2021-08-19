@@ -44,7 +44,6 @@
 
         mounted: function() {
             this.$store.dispatch('getAllPosts');
-            this.$store.dispatch('getUserInfos');
         },
 
         computed: {

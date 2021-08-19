@@ -31,6 +31,8 @@
                 this.$router.push('/');
                 return;
             }
+
+            this.$store.dispatch('getUserInfos');
         }
     }
 </script>

@@ -35,7 +35,7 @@
                                 </router-link>
                             </li>
                             <div v-if="isAdmin" class="dropdown-divider"></div>
-                            <b-dropdown-item v-if="isAdmin">
+                            <b-dropdown-item v-if="isAdmin" @click="allUsers()">
                                 <b-icon-person-lines-fill></b-icon-person-lines-fill> Administration
                             </b-dropdown-item>
                             <div class="dropdown-divider"></div>
@@ -82,6 +82,10 @@
 
             createPost: function() {
                 this.$router.push('/create-post');
+            },
+
+            allUsers: function() {
+                this.$router.push('/admin/users');
             }
         }
     }
