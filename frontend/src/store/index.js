@@ -64,6 +64,15 @@ export default new Vuex.Store({
             } else {
                 return false
             }
+        },
+
+        contentExcerpt: (state) => (index) => {
+            const content = state.posts[index].content;
+            if (content.length > 150) {
+                return content.substring(0, 150) + '...';
+            } else {
+                return content;
+            }
         }
     },
 

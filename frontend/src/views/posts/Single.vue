@@ -31,7 +31,7 @@
             </div>
         </div>
         <!-- Comment Form -->
-        <div class="card-groupomania">
+        <div class="card-groupomania" id="comment">
             <b-form class="form" @submit.prevent="onSubmit">
                 <b-form-group>
                     <b-form-textarea

@@ -1,6 +1,6 @@
 <template>
     <div class="users-posts">
-        <div class="user-post" v-for="post in posts" :key="post.id">
+        <div class="user-post" v-for="(post, index) in posts" :key="post.id">
             <div class="user" v-if="post.User">
                 <div class="user-info">
                     <b-avatar></b-avatar>
@@ -16,7 +16,7 @@
                 >
                     <h3 class="post-title">{{ post.title }}</h3>
                 </router-link>
-                <p v-if="post.content" class="post-content">{{ post.content }}</p>
+                <p v-if="post.content" class="post-content">{{ contentExcerpt(index) }}</p>
                 <router-link 
                 v-if="post.id && post.imageUrl"
                 :to="{ name: 'singlePost',
@@ -27,9 +27,11 @@
             </div>
             <div class="comment">
                 <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}">
+                    <b-button variant="secondary"><b-icon-eye-fill></b-icon-eye-fill> Lire plus</b-button>
+                </router-link>
+                <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}">
                     <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
                 </router-link>
-                <b-button variant="secondary"><b-icon-share-fill></b-icon-share-fill> Partager</b-button>
             </div>
         </div>
     </div>
@@ -38,6 +40,7 @@
 
 <script>
     import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'Posts',
@@ -49,7 +52,12 @@
         computed: {
             ...mapState({
                 posts: 'posts'
-            })
+            }),
+
+            ...mapGetters({
+                contentExcerpt: 'contentExcerpt'
+            }),
+
         }
     }
 </script>
