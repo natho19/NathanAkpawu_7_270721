@@ -77,6 +77,7 @@
                     password: this.form.password
                 }).then(function() {
                     self.$router.push('/posts')
+                    self.$store.dispatch('getUserInfos');
                 }, function(error) {
                     console.log(error);
                 });

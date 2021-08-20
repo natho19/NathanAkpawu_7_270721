@@ -22,10 +22,6 @@
 <script>
     export default {
         name: 'Modify',
-        
-        mounted: function() {
-            this.$store.dispatch('getUserInfos');
-        },
 
         data() {
             return {
@@ -35,8 +31,4 @@
     }
 </script>
 
-<style scoped>
-    .form-control {
-        appearance: auto !important;
-    }
-</style>
+<style></style>
