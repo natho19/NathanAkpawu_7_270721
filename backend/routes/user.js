@@ -12,4 +12,7 @@ router.get('/user/:id', auth, userController.getOneUser);
 router.put('/user/:id', auth, userController.modifyUser);
 router.delete('/user/:id', auth, userController.deleteUser);
 
+// Routes pour les admins
+router.get('/admin/users', auth, userController.getAllUsersByAdmin);
+
 module.exports = router;

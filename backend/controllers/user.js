@@ -95,3 +95,9 @@ exports.deleteUser = (req, res) => {
         .then(() => res.status(200).json({ message: 'Utilisateur supprimé avec succès' }))
         .catch(error => res.status(400).json({ message: 'Impossible de supprimer cet utilisateur', error }));
 }
+
+exports.getAllUsersByAdmin = (req, res) => {
+    User.findAll()
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(400).json({ message: 'Impossible d\'afficher tous les utilisateurs', error }));
+}

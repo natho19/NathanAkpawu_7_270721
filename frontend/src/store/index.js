@@ -31,6 +31,7 @@ export default new Vuex.Store({
         status: '',
         user: user,
         userInfos: {},
+        users: [],
         posts: [],
         post: {},
         comments: [],
@@ -73,7 +74,15 @@ export default new Vuex.Store({
             } else {
                 return content;
             }
-        }
+        },
+
+        getUserRole: (state) => (index) => {
+            if (state.users[index].isAdmin) {
+                return 'Admin';
+            } else {
+                return 'Utilisateur';
+            }
+        },
     },
 
     mutations: {
@@ -134,7 +143,11 @@ export default new Vuex.Store({
 
         SET_COMMENT: function(state, modifiedCommentContent) {
             state.comment.content = modifiedCommentContent;
-        }
+        },
+
+        USERS_LIST: function(state, users) {
+            state.users = users;
+        },
     },
 
     actions: {
@@ -361,5 +374,18 @@ export default new Vuex.Store({
                 });
             }
         },
+
+        getAllUsersByAdmin({ commit }) {
+            return new Promise((resolve, reject) => {
+                instance.get('auth/admin/users')
+                    .then(function(response) {
+                        commit('USERS_LIST', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
+        }
     }
 })

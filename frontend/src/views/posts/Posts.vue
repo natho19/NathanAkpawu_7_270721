@@ -112,7 +112,7 @@
     .btn-circle .b-icon {
         width: 16px;
         vertical-align: baseline;
-        margin-left: -4.5px;
+        margin-left: -5px;
     }
 
     .post {
