@@ -9,9 +9,26 @@
 <script>
     export default {
         name: 'Delete',
+
+        mounted: function() {
+            this.$store.dispatch('getUserInfos');
+            this.$store.dispatch('getUserInfosByAdmin', this.$route.params.id);
+
+            if (!this.$store.state.userInfos.isAdmin) {
+                this.$router.push('/');
+                return;
+            }
+        },
+
         methods: {
             deleteUser() {
-                console.log('Supprimer cet utilisateur');
+                const self = this;
+                this.$store.dispatch('deleteUserByAdmin')
+                    .then(function() {
+                        self.$router.push('/admin/users');
+                    }, function(error) {
+                        console.log(error);
+                    });
             }
         }
     }

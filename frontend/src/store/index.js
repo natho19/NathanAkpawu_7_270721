@@ -420,6 +420,18 @@ export default new Vuex.Store({
                         reject(error);
                     })
             });
-        }
+        },
+
+        deleteUserByAdmin({ state }) {
+            return new Promise((resolve, reject) => {
+                instance.delete(`auth/user/${state.userInfosByAdmin.id}`)
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
+            });
+        },
     }
 })
