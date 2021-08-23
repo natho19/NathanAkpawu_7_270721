@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const User = require('../models').User;
+const Op = require('sequelize').Op;
 
 // S'inscrire
 exports.signup = (req, res) => {
@@ -97,7 +98,28 @@ exports.deleteUser = (req, res) => {
 }
 
 exports.getAllUsersByAdmin = (req, res) => {
-    User.findAll()
+    const userId = req.params.id;
+    
+    User.findAll({
+        where: {
+            id: {
+                [Op.not]: userId
+            }
+        }
+    })
         .then(users => res.status(200).json(users))
-        .catch(error => res.status(400).json({ message: 'Impossible d\'afficher tous les utilisateurs', error }));
+        .catch(error => res.status(400).json({ message: 'Impossible d\'afficher les utilisateurs', error }));
+
+}
+
+exports.modifyUserRole = (req, res) => {
+    const id = req.params.id;
+
+    let updatedRole = {
+        isAdmin: req.body.isAdmin
+    }
+
+    User.update(updatedRole, { where: { id: id }})
+        .then(() => res.status(200).json({ message: 'Rôle de l\'utilisateur modifié avec succès' }))
+        .catch(error => res.status(400).json({ message: 'Impossible de modifier le rôle de cet utilisateur', error }));
 }

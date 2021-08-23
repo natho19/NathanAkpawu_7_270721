@@ -31,6 +31,7 @@ export default new Vuex.Store({
         status: '',
         user: user,
         userInfos: {},
+        userInfosByAdmin: {},
         users: [],
         posts: [],
         post: {},
@@ -148,6 +149,14 @@ export default new Vuex.Store({
         USERS_LIST: function(state, users) {
             state.users = users;
         },
+
+        USER_INFOS_BY_ADMIN: function(state, userInfosByAdmin) {
+            state.userInfosByAdmin = userInfosByAdmin;
+        },
+
+        SET_USER_ROLE: function(state, modifiedUserRole) {
+            state.userInfosByAdmin.isAdmin = modifiedUserRole;
+        }
     },
 
     actions: {
@@ -201,9 +210,9 @@ export default new Vuex.Store({
             });
         },
 
-        editUserName({ state }, userNewName) {
+        editUserName({ state }, newUserName) {
             return new Promise((resolve, reject) => {
-                instance.put(`auth/user/${state.userInfos.id}`, userNewName)
+                instance.put(`auth/user/${state.userInfos.id}`, newUserName)
                     .then(function(response) {
                         resolve(response);
                     })
@@ -375,9 +384,9 @@ export default new Vuex.Store({
             }
         },
 
-        getAllUsersByAdmin({ commit }) {
+        getAllUsersByAdmin({ commit, state }) {
             return new Promise((resolve, reject) => {
-                instance.get('auth/admin/users')
+                instance.get(`auth/admin/users/${state.userInfos.id}`)
                     .then(function(response) {
                         commit('USERS_LIST', response.data);
                         resolve(response);
@@ -385,6 +394,31 @@ export default new Vuex.Store({
                     .catch(function(error) {
                         reject(error);
                     });
+            });
+        },
+
+        getUserInfosByAdmin({ commit }, id) {
+            return new Promise((resolve, reject) => {
+                instance.get(`auth/user/${id}`)
+                    .then(function(response) {
+                        commit('USER_INFOS_BY_ADMIN', response.data);
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    });
+            });
+        },
+
+        editUserRole({ state }, newUserRole) {
+            return new Promise((resolve, reject) => {
+                instance.put(`auth/admin/users/${state.userInfosByAdmin.id}`, newUserRole)
+                    .then(function(response) {
+                        resolve(response);
+                    })
+                    .catch(function(error) {
+                        reject(error);
+                    })
             });
         }
     }

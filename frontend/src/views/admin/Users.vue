@@ -15,10 +15,10 @@
                     <td>{{ getUserRole(index) }}</td>
                     <td>
                         <router-link v-if="user.id" :to="{ name: 'adminModifyUser', params: { id: user.id } }">
-                            <b-button @click="modifyUser()" variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
+                            <b-button variant="success" class="btn-circle"><b-icon-pencil-fill></b-icon-pencil-fill></b-button>
                         </router-link>
                         <router-link v-if="user.id" :to="{ name: 'adminDeleteUser', params: { id: user.id } }">
-                            <b-button @click="deleteUser()" variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
+                            <b-button variant="danger" class="btn-circle"><b-icon-trash-fill></b-icon-trash-fill></b-button>
                         </router-link>
                     </td>
                 </tr>
@@ -35,11 +35,13 @@
         name: 'Users',
 
         mounted: function() {
+            this.$store.dispatch('getUserInfos');
+            this.$store.dispatch('getAllUsersByAdmin');
+            
             if (!this.$store.state.userInfos.isAdmin) {
                 this.$router.push('/');
                 return;
             }
-            this.$store.dispatch('getAllUsersByAdmin');
         },
 
         computed: {
@@ -50,16 +52,6 @@
             ...mapGetters({
                 getUserRole: 'getUserRole'
             })
-        },
-
-        methods: {
-            modifyUser() {
-                this.$router.push('/admin/modify-user/1');
-            },
-
-            deleteUser() {
-                this.$router.push('/admin/delete-user/1');
-            }
         }
     }
 </script>
