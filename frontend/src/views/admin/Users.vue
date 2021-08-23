@@ -1,7 +1,7 @@
 <template>
     <div class="card-groupomania">
         <h1><b-icon-person-lines-fill></b-icon-person-lines-fill> Utilisateurs</h1>
-        <table class="table table-striped table-responsive">
+        <table class="table table-striped table-responsive" v-if="users.length !== 0">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
@@ -24,6 +24,7 @@
                 </tr>
             </tbody>
         </table>
+        <p v-else>Aucun utilisateur pour le moment</p>
     </div>
 </template>
 
