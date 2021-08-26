@@ -19,7 +19,7 @@ exports.createPost = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible de créer ce post', error }));
 }
 
-// Afficher tous les posts classés par date de publication (plus récents)
+// Afficher tous les posts par date de publication (plus récents)
 exports.getAllPosts = (req, res) => {
     Post.findAll({ order: [['updatedAt', 'DESC']], include: { model: User } })
         .then(posts => res.status(200).json(posts))
@@ -54,7 +54,7 @@ exports.modifyPost = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible de modifier ce post', error }));
 }
 
-// Supprimer un post
+// Supprimer un post par l'utilisateur
 exports.deletePost = (req, res) => {
     const id = req.params.id;
     const userId = req.body.userId;
@@ -62,7 +62,7 @@ exports.deletePost = (req, res) => {
     Post.findOne({ where: { id: id } })
         .then(post => {
             // Si le post a une image, supprimer l'image du dossier '/images' et supprimer le post
-            // Sinon supprimer le post uniquement
+                // Sinon supprimer le post directement
             if (post.imageUrl) {
                 const filename = post.imageUrl.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
@@ -79,8 +79,8 @@ exports.deletePost = (req, res) => {
         .catch(error => res.status(500).json({ error }))
 }
 
-// Supprimer un post comme admin
-exports.deletePostAsAdmin = (req, res) => {
+// Supprimer un post par l'admin
+exports.deletePostByAdmin = (req, res) => {
     const id = req.params.id;
 
     Post.findOne({ where: { id: id } })

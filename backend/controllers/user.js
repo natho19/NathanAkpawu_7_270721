@@ -2,11 +2,10 @@ const bcrypt = require('bcrypt');
 const maskdata = require('maskdata');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-
-dotenv.config();
-
 const User = require('../models').User;
 const Op = require('sequelize').Op;
+
+dotenv.config();
 
 // S'inscrire
 exports.signup = (req, res) => {
@@ -28,20 +27,18 @@ exports.signup = (req, res) => {
 exports.login = (req, res) => {
     User.findOne({ where: { email: maskdata.maskEmail2(req.body.email) } })
         .then(user => {
-            // Si on ne trouve aucun utilisateur
             if (!user) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' })
             }
             // Bcrypt compare le mot de passe avec le hash enregistré
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
-                    // Si les résultats sont différents
                     if (!valid) {
                         return res.status(401).json({ error: 'Mot de passe incorrect !' })
                     }
                     res.status(200).json({
                         userId: user.id,
-                        // Génère un token grâce au package jsonwebtoken
+                        // Génère un token
                         token: jwt.sign(
                             { userId: user.id },
                             process.env.TOKEN_SECRET,
@@ -97,6 +94,7 @@ exports.deleteUser = (req, res) => {
         .catch(error => res.status(400).json({ message: 'Impossible de supprimer cet utilisateur', error }));
 }
 
+// Afficher tous les utilisateurs sauf l'admin
 exports.getAllUsersByAdmin = (req, res) => {
     const userId = req.params.id;
     
@@ -106,12 +104,12 @@ exports.getAllUsersByAdmin = (req, res) => {
                 [Op.not]: userId
             }
         }
-    })
-        .then(users => res.status(200).json(users))
-        .catch(error => res.status(400).json({ message: 'Impossible d\'afficher les utilisateurs', error }));
+    }).then(users => res.status(200).json(users))
+    .catch(error => res.status(400).json({ message: 'Impossible d\'afficher les utilisateurs', error }));
 
 }
 
+// Modifier le rôle d'un utilisateur
 exports.modifyUserRole = (req, res) => {
     const id = req.params.id;
 
