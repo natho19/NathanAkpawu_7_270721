@@ -111,6 +111,19 @@
         },
         
         methods: {
+            login() {
+                const self = this;
+                this.$store.dispatch('login', {
+                    email: this.email,
+                    password: this.password
+                }).then(function() {
+                    self.$router.push('/posts')
+                    self.$store.dispatch('getUserInfos');
+                }, function(error) {
+                    console.log(error);
+                });
+            },
+
             submitForm() {
                 this.$v.$touch();
                 
@@ -122,15 +135,7 @@
                         password: this.password
                     }).then(function() {
                         // Après l'inscription, se connecter immédiatement
-                        self.$store.dispatch('login', {
-                        email: self.email,
-                        password: self.password
-                        }).then(function() {
-                            self.$router.push('/posts')
-                            self.$store.dispatch('getUserInfos');
-                        }, function(error) {
-                            console.log(error);
-                        });
+                        self.login();
                     }, function(error) {
                         console.log(error);
                     })
