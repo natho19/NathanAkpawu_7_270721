@@ -5,19 +5,27 @@
         <b-form @submit.prevent="submitForm" class="form">
             <b-form-group>
                 <b-form-input
-                v-model="title"
                 placeholder="Titre"
-                required
+                type="text"
                 autofocus
+                v-model="$v.title.$model"
+                :class="{ 'is-invalid' : $v.title.$error, 'is-valid' : !$v.title.$invalid }"
                 ></b-form-input>
+
+                <b-form-invalid-feedback>
+                    Le titre est requis
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback>
+                    Le titre est valide
+                </b-form-valid-feedback>
             </b-form-group>
 
             <b-form-group>
                 <b-form-textarea
-                v-model="content"
                 placeholder="Contenu"
                 rows="4"
                 max-rows="8"
+                v-model="content"
                 ></b-form-textarea>
             </b-form-group>
 
@@ -36,13 +44,14 @@
                 ></b-form-file>
             </b-form-group>
         
-            <b-button type="submit" variant="success" :class="{ 'disabled' : !requiredFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
+            <b-button type="submit" variant="success" :class="{ 'disabled' : invalidateFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex'
+    import { required } from 'vuelidate/lib/validators'
 
     export default {
         name: 'Modify',
@@ -55,6 +64,12 @@
         data() {
             return {
                 file: null
+            }
+        },
+
+        validations: {
+            title: {
+                required
             }
         },
 
@@ -88,8 +103,8 @@
                 }
             },
 
-            requiredFields: function() {
-                if (this.title != '') {
+            invalidateFields: function() {
+                if (this.$v.$invalid) {
                     return true
                 } else {
                     return false
@@ -124,8 +139,4 @@
     }
 </script>
 
-<style>
-    .current-post-image {
-        margin-bottom: 25px !important;
-    }
-</style>
+<style></style>

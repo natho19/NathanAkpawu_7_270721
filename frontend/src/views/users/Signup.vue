@@ -14,7 +14,7 @@
                 ></b-form-input>
             
                 <b-form-invalid-feedback>
-                    Le nom est requis et doit avoir au moins 3 caractères
+                    Le nom est requis
                 </b-form-invalid-feedback>
                 <b-form-valid-feedback>
                     Le nom est valide
@@ -82,8 +82,7 @@
 
         validations: {
             name: {
-                required,
-                minLength: minLength(3)
+                required
             },
 
             email: {

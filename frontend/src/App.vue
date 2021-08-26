@@ -127,4 +127,12 @@
     .btn-orange:focus {
         box-shadow: 0 0 0 0.25rem rgba(223, 38, 1, .5) !important;
     }
+
+    .btn-remove-file {
+        margin: 5px;
+    }
+
+    .current-post-image {
+        margin-bottom: 25px !important;
+    }
 </style>
