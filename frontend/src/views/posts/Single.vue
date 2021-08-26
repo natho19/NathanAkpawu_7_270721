@@ -35,14 +35,22 @@
             <b-form class="form" @submit.prevent="submitForm">
                 <b-form-group>
                     <b-form-textarea
-                    v-model="content"
                     placeholder="Commentaire"
                     rows="4"
                     max-rows="6"
-                    required
+                    autofocus
+                    v-model="$v.content.$model"
+                    :class="{ 'is-invalid' : $v.content.$error, 'is-valid' : !$v.content.$invalid }"
                     ></b-form-textarea>
+
+                    <b-form-invalid-feedback>
+                        Le commentaire est requis
+                    </b-form-invalid-feedback>
+                    <b-form-valid-feedback>
+                        Le commentaire est valide
+                    </b-form-valid-feedback>
                 </b-form-group>
-                <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Envoyer</b-button>
+                <b-button type="submit" variant="primary" :class="{ 'disabled' : invalidateFields }"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Envoyer</b-button>
             </b-form>
         </div>
         <!-- Comments -->
@@ -90,6 +98,7 @@
 <script>
     import { mapState } from 'vuex'
     import { mapGetters } from 'vuex'
+    import { required } from 'vuelidate/lib/validators'
 
     export default {
         name: 'Single',
@@ -98,6 +107,18 @@
             this.$store.dispatch('getOnePost', this.$route.params.id);
             this.$store.dispatch('getAllComments', this.$route.params.id);
             this.$store.dispatch('getUserInfos');
+        },
+
+        data() {
+            return {
+                content: '',
+            }
+        },
+
+        validations: {
+            content: {
+                required
+            }
         },
 
         computed: {
@@ -113,34 +134,32 @@
                 isAdmin: 'isAdmin'
             }),
 
-            requiredFields: function() {
-                if (this.content != '' ) {
-                    return true;
+            invalidateFields: function() {
+                if (this.$v.$invalid) {
+                    return true
                 } else {
-                    return false;
+                    return false
                 }
-            },
-        },
-
-        data() {
-            return {
-                content: '',
             }
         },
         
         methods: {
             submitForm() {
-                this.$store.dispatch('createComment', {
-                    id: this.$route.params.id,
-                    newComment: {
-                        content: this.content,
-                        userId: this.userInfos.id
-                    }
-                }).then(function() {
-                    window.location.reload();
-                }, function(error) {
-                    console.log(error);
-                })
+                this.$v.$touch();
+
+                if (!this.$v.$invalid) {
+                    this.$store.dispatch('createComment', {
+                        id: this.$route.params.id,
+                        newComment: {
+                            content: this.content,
+                            userId: this.userInfos.id
+                        }
+                    }).then(function() {
+                        window.location.reload();
+                    }, function(error) {
+                        console.log(error);
+                    })
+                }
             }
         }
     }

@@ -115,25 +115,31 @@
             onFilePicked(event) {
                 this.file = event.target.files[0];
             },
+
             removeFile() {
                 this.$refs['file-input'].reset();
             },
+
             submitForm() {
-                const formData = new FormData();
-                const postId = this.post.id;
+                this.$v.$touch();
 
-                formData.append('title', this.title);
-                formData.append('content', this.content);
-                formData.append('image', this.file);
-                formData.append('userId', this.userInfos.id);
+                if (!this.$v.$invalid) {
+                    const formData = new FormData();
+                    const postId = this.post.id;
 
-                const self = this;
-                this.$store.dispatch('modifyPost', formData)
-                    .then(function() {
-                        self.$router.push(`/post/${postId}`);
-                    }, function(error) {
-                        console.log(error);
-                    })
+                    formData.append('title', this.title);
+                    formData.append('content', this.content);
+                    formData.append('image', this.file);
+                    formData.append('userId', this.userInfos.id);
+
+                    const self = this;
+                    this.$store.dispatch('modifyPost', formData)
+                        .then(function() {
+                            self.$router.push(`/post/${postId}`);
+                        }, function(error) {
+                            console.log(error);
+                        })
+                }
             }
         }
     }

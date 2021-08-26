@@ -5,21 +5,30 @@
         <b-form @submit.prevent="submitForm" class="form">
             <b-form-group>
                 <b-form-textarea
-                v-model="content"
                 placeholder="Commentaire"
                 rows="4"
                 max-rows="6"
-                required
+                autofocus
+                v-model="$v.content.$model"
+                :class="{ 'is-invalid' : $v.content.$error, 'is-valid' : !$v.content.$invalid }"
                 ></b-form-textarea>
+
+                <b-form-invalid-feedback>
+                    Le commentaire est requis
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback>
+                    Le commentaire est valide
+                </b-form-valid-feedback>
             </b-form-group>
         
-            <b-button type="submit" variant="success" :class="{ 'disabled' : !requiredFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
+            <b-button type="submit" variant="success" :class="{ 'disabled' : invalidateFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex'
+    import { required } from 'vuelidate/lib/validators'
 
     export default {
         name: 'Modify',
@@ -31,6 +40,12 @@
             });
             
             this.$store.dispatch('getUserInfos');
+        },
+
+        validations: {
+            content: {
+                required
+            }
         },
 
         computed: {
@@ -48,8 +63,8 @@
                 }
             },
 
-            requiredFields: function() {
-                if (this.content != '') {
+            invalidateFields: function() {
+                if (this.$v.$invalid) {
                     return true
                 } else {
                     return false
@@ -59,16 +74,20 @@
 
         methods: {
             submitForm() {
-                const self = this;
-                this.$store.dispatch('editComment', {
-                    content: this.content,
-                    userId: this.userInfos.id
-                })
-                .then(function() {
-                    self.$router.push(`/post/${self.comment.postId}`);
-                }, function(error) {
-                    console.log(error);
-                });
+                this.$v.$touch();
+
+                if (!this.$v.$invalid) {
+                    const self = this;
+                    this.$store.dispatch('editComment', {
+                        content: this.content,
+                        userId: this.userInfos.id
+                    })
+                    .then(function() {
+                        self.$router.push(`/post/${self.comment.postId}`);
+                    }, function(error) {
+                        console.log(error);
+                    });
+                }
             }
         } 
     }
