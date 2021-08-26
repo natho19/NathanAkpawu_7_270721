@@ -121,7 +121,16 @@
                         email: this.email,
                         password: this.password
                     }).then(function() {
-                        self.$router.push('/');
+                        // Après l'inscription, se connecter immédiatement
+                        self.$store.dispatch('login', {
+                        email: self.email,
+                        password: self.password
+                        }).then(function() {
+                            self.$router.push('/posts')
+                            self.$store.dispatch('getUserInfos');
+                        }, function(error) {
+                            console.log(error);
+                        });
                     }, function(error) {
                         console.log(error);
                     })
