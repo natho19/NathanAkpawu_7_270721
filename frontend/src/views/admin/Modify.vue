@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le rôle</h1>
 
-        <b-form @submit.prevent="onSubmit" class="form">
+        <b-form @submit.prevent="submitForm" class="form">
             <div class="form-group">
                 <div class="form-check form-check-inline">
                     <input v-model="isAdmin" class="form-check-input" type="radio" name="role" id="admin" :value="true" checked>
@@ -44,7 +44,7 @@
         },
 
         methods: {
-            onSubmit() {
+            submitForm() {
                 const self = this;
                 this.$store.dispatch('editUserRole', {
                     isAdmin: this.isAdmin

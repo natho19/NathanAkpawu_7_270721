@@ -32,7 +32,7 @@
         </div>
         <!-- Comment Form -->
         <div class="card-groupomania" id="comment">
-            <b-form class="form" @submit.prevent="onSubmit">
+            <b-form class="form" @submit.prevent="submitForm">
                 <b-form-group>
                     <b-form-textarea
                     v-model="content"
@@ -129,7 +129,7 @@
         },
         
         methods: {
-            onSubmit() {
+            submitForm() {
                 this.$store.dispatch('createComment', {
                     id: this.$route.params.id,
                     newComment: {

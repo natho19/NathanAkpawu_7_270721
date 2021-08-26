@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le commentaire</h1>
 
-        <b-form @submit.prevent="onSubmit" class="form">
+        <b-form @submit.prevent="submitForm" class="form">
             <b-form-group>
                 <b-form-textarea
                 v-model="content"
@@ -58,7 +58,7 @@
         },
 
         methods: {
-            onSubmit() {
+            submitForm() {
                 const self = this;
                 this.$store.dispatch('editComment', {
                     content: this.content,

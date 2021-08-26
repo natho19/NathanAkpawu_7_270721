@@ -2,13 +2,23 @@
     <div class="card-groupomania">
         <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le compte</h1>
 
-        <b-form @submit.prevent="onSubmit" class="form">
+        <b-form @submit.prevent="submitForm" class="form">
             <b-form-group label="Nom" label-for="name">
                 <b-form-input
                 id="name"
-                v-model="name"
-                required
+                placeholder="Entrer votre nom"
+                type="text"
+                autofocus
+                v-model="$v.name.$model"
+                :class="{ 'is-invalid' : $v.name.$error, 'is-valid' : !$v.name.$invalid }"
                 ></b-form-input>
+
+                <b-form-invalid-feedback>
+                    Le nom est requis et doit avoir au moins 3 caractères
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback>
+                    Le nom est valide
+                </b-form-valid-feedback>
             </b-form-group>
 
             <b-form-group label="Email" label-for="email">
@@ -21,15 +31,24 @@
                 ></b-form-input>
             </b-form-group>
         
-            <b-button type="submit" variant="success" :class="{ 'disabled' : !requiredFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
+            <b-button type="submit" variant="success" :class="{ 'disabled' : invalidateFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
 </template>
 
 <script>
+    import { required, minLength } from 'vuelidate/lib/validators'
+
     export default {
         mounted: function() {
             this.$store.dispatch('getUserInfos');
+        },
+
+        validations: {
+            name: {
+                required,
+                minLength: minLength(3)
+            }
         },
 
         computed: {
@@ -48,8 +67,8 @@
                 }
             },
             
-            requiredFields: function() {
-                if (this.name != '') {
+            invalidateFields: function() {
+                if (this.$v.$invalid) {
                     return true
                 } else {
                     return false
@@ -58,14 +77,18 @@
         },
 
         methods: {
-            onSubmit() {
-                this.$store.dispatch('editUserName', { 
+            submitForm() {
+                this.$v.$touch();
+
+                if (!this.$v.$invalid) {
+                    this.$store.dispatch('editUserName', { 
                     name: this.name 
-                }).then(function() {
-                    console.log('Utilisateur modifié avec succès !')
-                }, function(error) {
-                    console.log(error);
-                });
+                    }).then(function() {
+                        console.log('Utilisateur modifié avec succès !')
+                    }, function(error) {
+                        console.log(error);
+                    });
+                }
             }
         }
     }

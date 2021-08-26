@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le post</h1>
 
-        <b-form @submit.prevent="onSubmit" class="form">
+        <b-form @submit.prevent="submitForm" class="form">
             <b-form-group>
                 <b-form-input
                 v-model="title"
@@ -103,7 +103,7 @@
             removeFile() {
                 this.$refs['file-input'].reset();
             },
-            onSubmit() {
+            submitForm() {
                 const formData = new FormData();
                 const postId = this.post.id;
 

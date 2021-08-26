@@ -2,39 +2,62 @@
     <div class="card-groupomania">
         <h1><b-icon-person-plus-fill></b-icon-person-plus-fill> S'inscrire en quelques secondes...</h1>
 
-        <b-form @submit.prevent="onSubmit" class="form">
+        <b-form @submit.prevent="submitForm" class="form">
             <b-form-group label="Nom" label-for="name">
                 <b-form-input
                 id="name"
-                v-model="form.name"
                 placeholder="Entrer votre nom"
-                required
+                type="text"
                 autofocus
+                v-model="$v.name.$model"
+                :class="{ 'is-invalid' : $v.name.$error, 'is-valid' : !$v.name.$invalid }"
                 ></b-form-input>
+            
+                <b-form-invalid-feedback>
+                    Le nom est requis et doit avoir au moins 3 caractères
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback>
+                    Le nom est valide
+                </b-form-valid-feedback>
             </b-form-group>
         
             <b-form-group label="Email" label-for="email">
                 <b-form-input
                 id="email"
-                v-model="form.email"
                 placeholder="Entrer votre email"
                 type="email"
-                required
+                v-model="$v.email.$model"
+                :class="{ 'is-invalid' : $v.email.$error, 'is-valid' : !$v.email.$invalid }"
                 ></b-form-input>
+
+                <b-form-invalid-feedback>
+                    L'email est requis et doit être une adresse valide
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback>
+                    L'adresse email est valide
+                </b-form-valid-feedback>
             </b-form-group>
 
             <b-form-group label="Mot de passe" label-for="password">
                 <b-form-input
-                v-model="form.password"
+                id="password"
                 placeholder="Entrer votre mot de passe"
                 type="password"
-                required
+                v-model="$v.password.$model"
+                :class="{ 'is-invalid' : $v.password.$error, 'is-valid' : !$v.password.$invalid }"
                 ></b-form-input>
+
+                <b-form-invalid-feedback>
+                    Le mot de passe est requis et doit avoir au moins 6 caractères
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback>
+                    Le mot de passe est valide
+                </b-form-valid-feedback>
             </b-form-group>
 
             <b-alert v-if="status == 'error_create'" variant="danger" show><b-icon-exclamation-triangle></b-icon-exclamation-triangle> Adresse email déjà utilisée</b-alert>
 
-            <b-button type="submit" variant="primary" :class="{ 'disabled' : !requiredFields }"><b-icon-person-plus-fill></b-icon-person-plus-fill>
+            <b-button type="submit" variant="primary" :class="{ 'disabled' : invalidateFields }"><b-icon-person-plus-fill></b-icon-person-plus-fill>
                 <span v-if="status == 'loading'"> Inscription en cours...</span>
                 <span v-else> S'inscrire</span>
             </b-button>
@@ -44,17 +67,33 @@
 
 <script>
     import { mapState } from 'vuex'
+    import { required, email, minLength } from 'vuelidate/lib/validators'
 
     export default {
         name: 'Signup',
 
         data() {
             return {
-                form: {
-                    name: '',
-                    email: '',
-                    password: ''
-                }
+                name: '',
+                email: '',
+                password: ''
+            }
+        },
+
+        validations: {
+            name: {
+                required,
+                minLength: minLength(3)
+            },
+
+            email: {
+                required,
+                email
+            },
+
+            password: {
+                required,
+                minLength: minLength(6)
             }
         },
 
@@ -63,8 +102,8 @@
                 status: 'status'
             }),
 
-            requiredFields: function() {
-                if (this.form.name != '' && this.form.email != '' && this.form.password != '' ) {
+            invalidateFields: function() {
+                if (this.$v.$invalid) {
                     return true
                 } else {
                     return false
@@ -73,17 +112,21 @@
         },
         
         methods: {
-            onSubmit() {
-                const self = this;
-                this.$store.dispatch('createAccount', {
-                    name: this.form.name,
-                    email: this.form.email,
-                    password: this.form.password
-                }).then(function() {
-                    self.$router.push('/');
-                }, function(error) {
-                    console.log(error);
-                })
+            submitForm() {
+                this.$v.$touch();
+                
+                if (!this.$v.$invalid) {
+                    const self = this;
+                    this.$store.dispatch('createAccount', {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password
+                    }).then(function() {
+                        self.$router.push('/');
+                    }, function(error) {
+                        console.log(error);
+                    })
+                }
             }
         }
     }

@@ -2,7 +2,7 @@
     <div class="card-groupomania">
         <h1><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier un post</h1>
 
-        <b-form @submit.prevent="onSubmit" class="form">
+        <b-form @submit.prevent="submitForm" class="form">
             <b-form-group>
                 <b-form-input
                 v-model="form.title"
@@ -80,7 +80,7 @@
                 this.$refs['file-input'].reset();
             },
 
-            onSubmit() {
+            submitForm() {
                 const formData = new FormData();
                 formData.append('title', this.form.title);
                 formData.append('content', this.form.content);
