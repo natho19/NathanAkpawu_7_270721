@@ -20,19 +20,23 @@ export default [
     { path: '/signup', name: 'signup', component: Signup },
     { path: '/modify-user', name: 'modifyUser', component: ModifyUser },
     { path: '/delete-user', name: 'deleteUser', component: DeleteUser },
+
     // Post routes
     { path: '/create-post', name: 'createPost', component: CreatePost },
     { path: '/posts', name: 'allPosts', component: AllPosts },
     { path: '/post/:id', name: 'singlePost', component: SinglePost },
     { path: '/modify-post/:id', name: 'modifyPost', component: ModifyPost },
     { path: '/delete-post/:id', name: 'deletePost', component: DeletePost },
+
     // Comment routes
     { path: '/post/:postId/modify-comment/:id', name: 'modifyComment', component: ModifyComment },
     { path: '/post/:postId/delete-comment/:id', name: 'deleteComment', component: DeleteComment },
+
     // Admin routes
     { path: '/admin/users', name: 'allUsers', component: AllUsers },
     { path: '/admin/modify-user/:id', name: 'adminModifyUser', component: AdminModifyUser },
     { path: '/admin/delete-user/:id', name: 'adminDeleteUser', component: AdminDeleteUser },
+    
     // 404
     { path: '*', name: 'notFound', component: NotFound }
 ]

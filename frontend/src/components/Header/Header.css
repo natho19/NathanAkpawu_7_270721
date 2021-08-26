@@ -11,6 +11,11 @@
     color: #FFF !important;
 }
 
+.navbar-nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .navbar-nav button.btn-danger {
     margin: 0 8px;
 }

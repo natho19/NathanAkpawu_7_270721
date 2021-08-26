@@ -12,12 +12,8 @@
                 :class="{ 'is-invalid' : $v.email.$error, 'is-valid' : !$v.email.$invalid }"
                 ></b-form-input>
 
-                <b-form-invalid-feedback>
-                    L'email est requis et doit être une adresse valide
-                </b-form-invalid-feedback>
-                <b-form-valid-feedback>
-                    L'adresse email est valide
-                </b-form-valid-feedback>
+                <b-form-invalid-feedback>L'email est requis et doit être une adresse valide</b-form-invalid-feedback>
+                <b-form-valid-feedback>L'adresse email est valide</b-form-valid-feedback>
             </b-form-group>
 
             <b-form-group>
@@ -28,12 +24,8 @@
                 :class="{ 'is-invalid' : $v.password.$error, 'is-valid' : !$v.password.$invalid }"
                 ></b-form-input>
 
-                <b-form-invalid-feedback>
-                    Le mot de passe est requis et doit avoir au moins 6 caractères
-                </b-form-invalid-feedback>
-                <b-form-valid-feedback>
-                    Le mot de passe est valide
-                </b-form-valid-feedback>
+                <b-form-invalid-feedback>Le mot de passe est requis et doit avoir au moins 6 caractères</b-form-invalid-feedback>
+                <b-form-valid-feedback>Le mot de passe est valide</b-form-valid-feedback>
             </b-form-group>
 
             <b-alert v-if="status == 'error_login'" variant="danger" show><b-icon-exclamation-triangle></b-icon-exclamation-triangle> Adresse email et/ou mot de passe invalide</b-alert>

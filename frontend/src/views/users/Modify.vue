@@ -13,12 +13,8 @@
                 :class="{ 'is-invalid' : $v.name.$error, 'is-valid' : !$v.name.$invalid }"
                 ></b-form-input>
 
-                <b-form-invalid-feedback>
-                    Le nom est requis et doit avoir au moins 3 caractères
-                </b-form-invalid-feedback>
-                <b-form-valid-feedback>
-                    Le nom est valide
-                </b-form-valid-feedback>
+                <b-form-invalid-feedback>Le nom est requis</b-form-invalid-feedback>
+                <b-form-valid-feedback>Le nom est valide</b-form-valid-feedback>
             </b-form-group>
 
             <b-form-group label="Email" label-for="email">
@@ -37,7 +33,7 @@
 </template>
 
 <script>
-    import { required, minLength } from 'vuelidate/lib/validators'
+    import { required } from 'vuelidate/lib/validators'
 
     export default {
         mounted: function() {
@@ -46,8 +42,7 @@
 
         validations: {
             name: {
-                required,
-                minLength: minLength(3)
+                required
             }
         },
 

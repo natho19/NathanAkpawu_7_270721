@@ -13,12 +13,8 @@
                 :class="{ 'is-invalid' : $v.content.$error, 'is-valid' : !$v.content.$invalid }"
                 ></b-form-textarea>
 
-                <b-form-invalid-feedback>
-                    Le commentaire est requis
-                </b-form-invalid-feedback>
-                <b-form-valid-feedback>
-                    Le commentaire est valide
-                </b-form-valid-feedback>
+                <b-form-invalid-feedback>Le commentaire est requis</b-form-invalid-feedback>
+                <b-form-valid-feedback>Le commentaire est valide</b-form-valid-feedback>
             </b-form-group>
         
             <b-button type="submit" variant="success" :class="{ 'disabled' : invalidateFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>

@@ -18,7 +18,9 @@
                         <li v-if="status != 'login'" class="nav-item">
                             <router-link to="/" class="nav-link" exact><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right> Se connecter</router-link>
                         </li>
-                        <b-button v-if="status == 'login'" @click="createPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
+                        <li v-if="status == 'login'">
+                            <b-button @click="createPost()" pill variant="danger" class="btn-orange"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
+                        </li>
                         <li v-if="status == 'login'" class="nav-item">
                             <router-link to="/posts" class="nav-link" exact><b-icon-list></b-icon-list> Tous les posts</router-link>
                         </li>
@@ -39,7 +41,7 @@
                                 <b-icon-person-lines-fill></b-icon-person-lines-fill> Administration
                             </b-dropdown-item>
                             <div class="dropdown-divider"></div>
-                            <b-dropdown-item href="#" @click="logout()">
+                            <b-dropdown-item @click="logout()">
                                 <b-icon-box-arrow-in-left></b-icon-box-arrow-in-left> Se déconnecter
                             </b-dropdown-item>
                         </b-nav-item-dropdown>

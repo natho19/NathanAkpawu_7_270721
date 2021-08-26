@@ -12,12 +12,8 @@
                 :class="{ 'is-invalid' : $v.title.$error, 'is-valid' : !$v.title.$invalid }"
                 ></b-form-input>
 
-                <b-form-invalid-feedback>
-                    Le titre est requis
-                </b-form-invalid-feedback>
-                <b-form-valid-feedback>
-                    Le titre est valide
-                </b-form-valid-feedback>
+                <b-form-invalid-feedback>Le titre est requis</b-form-invalid-feedback>
+                <b-form-valid-feedback>Le titre est valide</b-form-valid-feedback>
             </b-form-group>
 
             <b-form-group>
