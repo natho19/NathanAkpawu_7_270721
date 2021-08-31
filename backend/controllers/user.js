@@ -8,18 +8,24 @@ dotenv.config();
 
 // S'inscrire
 exports.signup = (req, res) => {
-    bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            const user = {
-                name: req.body.name,
-                email: req.body.email,
-                password: hash
-            };
-            User.create(user)
-                .then(() => res.status(201).json({ message: 'Utilisateur créé avec succès !' }))
-                .catch(error => res.status(400).json({ message: 'Impossible de créer cet utilisateur', error }));
-        })
-        .catch(error => res.status(500).json({ error }))
+    // Valider le mot de passe
+    var regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    if (regex.test(req.body.password)) {
+        bcrypt.hash(req.body.password, 10)
+            .then(hash => {
+                const user = {
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: hash
+                };
+                User.create(user)
+                    .then(() => res.status(201).json({ message: 'Utilisateur créé avec succès !' }))
+                    .catch(error => res.status(400).json({ message: 'Impossible de créer cet utilisateur', error }));
+            })
+            .catch(error => res.status(500).json({ error }))
+    } else {
+        return res.status(401).json({ message: 'Le mot de passe doit avoir au moins 8 caractères, un nombre, une minuscule, et une majuscule' })
+    }
 };
 
 // Se connecter

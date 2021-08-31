@@ -39,7 +39,7 @@
                 :class="{ 'is-invalid' : $v.password.$error, 'is-valid' : !$v.password.$invalid }"
                 ></b-form-input>
 
-                <b-form-invalid-feedback>Le mot de passe est requis et doit avoir au moins 6 caractères</b-form-invalid-feedback>
+                <b-form-invalid-feedback>Le mot de passe doit avoir au moins 8 caractères, un nombre, une minuscule, et une majuscule</b-form-invalid-feedback>
                 <b-form-valid-feedback>Le mot de passe est valide</b-form-valid-feedback>
             </b-form-group>
 
@@ -56,6 +56,7 @@
 <script>
     import { mapState } from 'vuex'
     import { required, email, minLength } from 'vuelidate/lib/validators'
+    import { hasNumber, hasLowercaseLetter, hasCapitalcaseLetter } from '../../validators/password'
 
     export default {
         name: 'Signup',
@@ -80,7 +81,10 @@
 
             password: {
                 required,
-                minLength: minLength(6)
+                minLength: minLength(8),
+                hasNumber,
+                hasLowercaseLetter,
+                hasCapitalcaseLetter
             }
         },
 
