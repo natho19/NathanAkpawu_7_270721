@@ -4,7 +4,6 @@ import ModifyUser from './views/users/Modify'
 import DeleteUser from './views/users/Delete'
 import CreatePost from './views/posts/Create'
 import AllPosts from './views/posts/Posts'
-import SinglePostForComment from './views/posts/Single'
 import SinglePost from './views/posts/Single'
 import ModifyPost from './views/posts/Modify'
 import DeletePost from './views/posts/Delete'
@@ -26,7 +25,6 @@ export default [
     { path: '/create-post', name: 'createPost', component: CreatePost },
     { path: '/posts', name: 'allPosts', component: AllPosts },
     { path: '/post/:id', name: 'singlePost', component: SinglePost },
-    { path: '/post/:id#comment', name: 'singlePostForComment', component: SinglePostForComment },
     { path: '/modify-post/:id', name: 'modifyPost', component: ModifyPost },
     { path: '/delete-post/:id', name: 'deletePost', component: DeletePost },
 

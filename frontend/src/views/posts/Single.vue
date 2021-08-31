@@ -38,7 +38,6 @@
                     placeholder="Commentaire"
                     rows="4"
                     max-rows="6"
-                    autofocus
                     v-model="$v.content.$model"
                     :class="{ 'is-invalid' : $v.content.$error, 'is-valid' : !$v.content.$invalid }"
                     ></b-form-textarea>
