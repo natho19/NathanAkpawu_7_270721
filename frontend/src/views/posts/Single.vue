@@ -76,7 +76,7 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="comment">
+                <div class="comment-content">
                     <p>{{ comment.content }}</p>
                 </div>
             </div>
@@ -193,7 +193,7 @@
         margin-bottom: 20px;
     }
 
-    .comment p {
+    .comment-content p {
         font-size: 14.5px;
         font-weight: 300;
         margin-bottom: 5px;

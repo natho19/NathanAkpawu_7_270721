@@ -29,7 +29,7 @@
                 <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}">
                     <b-button variant="secondary"><b-icon-eye-fill></b-icon-eye-fill> Lire plus</b-button>
                 </router-link>
-                <router-link v-if="post.id" :to="{ name: 'singlePost', params: { id: post.id }}">
+                <router-link v-if="post.id" :to="{ name: 'singlePostForComment', params: { id: post.id }}">
                     <b-button variant="primary"><b-icon-chat-dots-fill></b-icon-chat-dots-fill> Commenter</b-button>
                 </router-link>
             </div>
