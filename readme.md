@@ -12,9 +12,10 @@ Projet 7 du parcours développeur web d'OpenClassrooms : Créez un réseau socia
 - Le ou la chargé-e de communication doit pouvoir **modérer les interactions** entre salariés
 
 ## :white_check_mark: Compétences évaluées
-- Implémenter un modèle logique de données conformément à la réglementation
-- Mettre en œuvre des opérations CRUD de manière sécurisée
-- Stocker des données de manière sécurisée
+- Authentifier un utilisateur et maintenir sa session
+- Personnaliser le contenu envoyé à un client web
+- Gérer un stockage de données à l'aide de SQL
+- Implémenter un stockage de données sécurisé en utilisant SQL
 
 ## :rocket: Installation backend
 Installer `nodejs` et `npm` sur votre machine en local. Après, se positionner sur le dossier backend à partir du projet.
